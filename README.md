@@ -1,6 +1,6 @@
 # galaxy-pp #
 
-An active fork from Beier's original **galaxy++** back in 2012. I use it to publish my game project in Starcraft 2 Arcade. This project includes:
+An fork from Beier's original **galaxy++** back in 2012. I use it to publish my game project in Starcraft 2 Arcade. This project includes:
 	
 * A compiler to compile galaxy++ to galaxy code.
 * An IDE to edit, compile and generate Arcade game map.

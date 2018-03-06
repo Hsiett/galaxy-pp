@@ -6,3 +6,4 @@ Updater/bin/
 Updater/obj/
 Galaxy Editor 2/Compiler/galaxy2 - 副本.sablecc
 *.lnk
+*.suo

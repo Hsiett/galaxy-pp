@@ -1,9 +1,10 @@
-# galaxy-pp
+# galaxy-pp #
 
 An active fork from Beier's original **galaxy++** back in 2012. I use it to publish my game project in Starcraft 2 Arcade. This project includes:
-	* A compiler to compile galaxy++ to galaxy code.
-	* An IDE to edit, compile and generate Arcade game map.
-	* An GUI to customize the user interface in Game.
+	
+* A compiler to compile galaxy++ to galaxy code.
+* An IDE to edit, compile and generate Arcade game map.
+* An GUI to customize the user interface in Game.
 
 Galaxy++ is an programming language that extends `Galaxy` scripts used by Starcraft 2. It applies object-oriented programming concept to allow map makers to code and manage the script more efficiently. To learn more about Galaxy++,
 you can refer to [Galaxy++ editor by Beier](https://www.sc2mapster.com/projects/galaxy-editor-beier).

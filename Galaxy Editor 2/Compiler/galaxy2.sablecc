@@ -1,0 +1,1788 @@
+/*
+ * JOOS2 Grammar
+ * Based on Java grammar by Etienne Gagnon.
+ */
+
+Package Galaxy_Editor_2.Compiler.Generated;
+
+
+/*******************************************************************
+ * Helpers                                                         *
+ *******************************************************************/
+Helpers
+
+    latin1_input_character = [0..0xffff];
+    ht  = 0x09;
+    lf  = 0x0a;
+    ff  = 0x0c;
+    cr  = 0x0d;
+    sp  = ' ';
+
+    line_terminator = lf | cr | cr lf; 
+    input_character = [latin1_input_character - [cr + lf]];
+
+    not_star =    [input_character - '*'] | line_terminator;
+    not_star_not_slash = [input_character - ['*' + '/']] | line_terminator;
+
+    digit = ['0'..'9'];
+    non_zero_digit = ['1'..'9'];
+    octal_digit = ['0'..'7'];
+    zero_to_three = ['0'..'3'];
+
+    hex_digit = ['0'..'9'] | ['a'..'f'] | ['A'..'F'];
+    non_zero_hex_digit = ['1'..'9'] | ['a'..'f'] | ['A'..'F'];
+    hexadecimal_numeral = '0x' hex_digit hex_digit*;
+    octal_numeral = '0' octal_digit octal_digit*;
+    decimal_numeral = '0' | non_zero_digit digit*;
+	fixed_numeral = digit* '.' digit digit* | digit digit* '.' digit*;
+
+    latin1_letter =
+        [0x41..0x5a] | [0x61..0x7a] | [0xaa..0xaa] | [0xb5..0xb5] |
+        [0xba..0xba] | [0xc0..0xd6] | [0xd8..0xf6] | [0xf8..0xff] | [0x0100..0xffff];
+
+    java_letter = latin1_letter | '$' | '_';
+    java_letter_or_digit = latin1_letter | digit | '$' | '_';
+
+    octal_escape = '\' (octal_digit octal_digit? | zero_to_three octal_digit octal_digit);
+    hex_escape = '\x' non_zero_hex_digit? hex_digit;
+    escape_sequence = '\b' | '\t' | '\n' | '\f' | '\r' | '\"' | '\' ''' | '\\' | octal_escape | hex_escape;
+    single_character = [input_character - [''' + '\']] | escape_sequence;
+    string_character = [input_character - ['"' + '\']] | escape_sequence;
+
+
+/*******************************************************************
+ * Tokens                                                          *
+ *******************************************************************/
+Tokens
+
+// Whitespace
+
+    white_space = (sp | ht | ff | line_terminator)*;
+
+    traditional_comment = '/*' not_star+ '*'+ (not_star_not_slash not_star* '*'+)* '/';
+    documentation_comment =    '/**' '*'* (not_star_not_slash not_star* '*'+)* '/';
+
+    end_of_line_comment = '//' input_character* line_terminator?;
+
+// Keywords
+
+    break = 'break';
+    const = 'const';
+	continue = 'continue';
+    else = 'else'; 
+    if = 'if';
+    include = 'include';  
+    native = 'native';
+    return = 'return';
+	static = 'static';
+    struct = 'struct';
+    void = 'void';
+    while = 'while';
+	escape_global = 'global';
+	inline = 'inline';
+	ref = 'ref';
+	out = 'out';
+	trigger = 'Trigger';
+    events = 'events';
+    conditions = 'conditions';
+    actions = 'actions';
+	namespace = 'namespace';
+	using = 'using';
+    preload_bank = 'PreloadBank';
+    async_invoke = 'InvokeAsync';
+    sync_invoke = 'InvokeSync';
+    switch = 'switch';
+    case = 'case';
+    default = 'default';
+    delegate = 'delegate';
+    typedef = 'typedef';
+    get = 'get';
+    set = 'set';
+    value = 'value';
+    enrichment = 'enrich';
+	base = 'base';
+    public = 'public';
+	private = 'private';
+	protected = 'protected';
+	operator = 'operator';
+	enum = 'enum';
+	
+	initializer = 'Initializer';
+    library_name = 'LibraryName';
+    library_version = 'LibraryVersion';
+    supported_versions = 'SupportedVersions';
+    required_libraries = 'RequiredLibraries';
+    
+    delete = 'delete';
+    new = 'new';
+    class_token = 'class';
+    this = 'this';
+    
+    
+    
+	for = 'for';
+	
+    true = 'true';
+    false = 'false';
+    null = 'null';
+
+// Delimiters
+
+    l_paren = '(';
+    r_paren = ')';
+    l_brace = '{';
+    r_brace = '}';
+    l_bracket = '[';
+    r_bracket = ']';
+    semicolon = ';';
+    comma = ',';
+    dot = '.';
+    arrow = '->';
+    colon = ':';
+	questionmark = '?';
+	tilde = '~';
+	sharp = '#';
+	
+
+// Assignment and logic
+
+    assign = '=';
+	assign_add = '+=';
+	assign_sub = '-=';
+	assign_mul = '*=';
+	assign_div = '/=';
+	assign_mod = '%=';
+    complement = '!';
+    and_and = '&&';
+    or_or = '||';
+
+// Comparison
+
+    lt = '<';
+    gt = '>';
+    eq = '==';
+    lteq = '<=';
+    gteq ='>=';
+    neq = '!=';
+
+// Arithmetic
+
+    plus = '+';
+    minus = '-';
+    star = '*';
+    div = '/';
+    and = '&';
+    or = '|';
+    xor = '^';
+    mod = '%';
+	l_bit_shift = '<<';
+	r_bit_shift = '>>';
+	
+	plus_plus = '++';
+	minus_minus = '--';
+
+// Literals and identifiers
+
+    integer_literal = decimal_numeral;
+    hex_literal = hexadecimal_numeral;
+    octal_literal = octal_numeral;
+	fixed_literal = fixed_numeral;
+    string_literal = '"' string_character* '"';
+    char_literal = ''' single_character ''';
+    identifier = java_letter java_letter_or_digit*;
+	
+	comment_begin = '/*';
+    comment_end = '*/';
+	unknown = latin1_input_character;//Just to make everything go through the lexer
+
+/*******************************************************************
+ * Ignored Tokens                                                  *
+ *******************************************************************/
+Ignored Tokens
+
+	white_space, 
+	traditional_comment, 
+	documentation_comment, 
+	end_of_line_comment;
+
+
+/*******************************************************************
+ * Productions                                                     *
+ *******************************************************************/
+Productions
+
+// The parsing goal is a source file.
+// A source file just contains a class declaration
+
+goal {-> source_file}
+	= {a}	using_declaration* member_declaration*
+    	{-> New source_file.a([member_declaration.decl], Null, [using_declaration.decl])}
+	| {b}	namespace identifier_dot_list using_declaration* member_declaration*
+    	{-> New source_file.a([New decl.temp_namespace(namespace, [identifier_dot_list.identifier], [member_declaration.decl], Null)], Null, [using_declaration.decl])}
+	;
+
+using_declaration {-> decl}
+	= {a}	using identifier_dot_list
+		{-> New decl.using([identifier_dot_list.identifier])}
+	;
+
+identifier_dot_list {-> identifier*}
+	= {a} identifier
+		{-> [identifier]}
+	| {b} identifier_dot_list dot identifier
+		{-> [identifier_dot_list.identifier, identifier]}
+	;
+	
+
+// ********** Type declarations ***********
+
+
+
+member_declaration {-> decl}
+	= {a}	method_declaration
+		{-> method_declaration.decl}
+	| {b}	field_declaration
+		{-> field_declaration.decl}
+	| {c}	include_declaration
+		{-> include_declaration.decl}
+	| {d} struct_declaration
+		{-> struct_declaration.decl}
+	| {h} class_declaration
+		{-> class_declaration.decl}
+    | {k} enrichment_declaration
+        {-> enrichment_declaration.decl}
+    | {e}   preload_bank l_paren string_literal comma literal r_paren semicolon
+        {-> New decl.preload_bank(preload_bank, string_literal, literal.exp)}
+    | {f} initializer_declaration
+        {-> initializer_declaration.decl}
+    | {g} trigger_declaration
+        {-> trigger_declaration.decl}
+    | {i} typedef_declaration
+        {-> typedef_declaration.decl}
+    | {j} property_declaration
+        {-> property_declaration.decl}
+	| {l} nestable_namespace_declaration
+		{-> nestable_namespace_declaration.decl}
+	| {m} operator_declaration
+		{-> operator_declaration.decl}
+	| {n} enum_declaration
+		{-> enum_declaration.decl}
+	;
+	
+	
+
+	
+enum_declaration {-> decl}
+	= {a} visibility static? enum identifier l_brace enum_locals? r_brace
+		{-> New decl.enum(visibility.visibility_modifier, static, enum, identifier, [enum_locals.enum_local], r_brace)}
+	;
+
+enum_locals {-> enum_local*}
+	= {a} enum_local
+		{-> [enum_local.enum_local]}
+	| {b} enum_locals comma enum_local
+		{-> [enum_locals.enum_local, enum_local.enum_local]}
+	;
+	
+enum_local {-> enum_local}
+	= {a} identifier enum_local_init?
+		{-> New enum_local.a(identifier, enum_local_init.exp)}
+	;
+
+enum_local_init {-> exp}
+	= {a} assign int_literal
+		{-> int_literal.exp}
+	;
+	
+operator_declaration {-> decl}
+	= {a} visibility static? type operator overloadable_binop method_params method_body
+		{-> New decl.operator(visibility.visibility_modifier, static, type.type, operator, overloadable_binop.binop, [method_params.local_decl], method_body.block)}
+	;
+
+overloadable_binop {-> binop}
+	=	{plus} [token]:plus
+		{-> New binop.plus(token)}
+	|	{minus} [token]:minus
+		{-> New binop.minus(token)}
+	|	{times} [token]:star
+		{-> New binop.times(token)}
+	|	{divide} [token]:div
+		{-> New binop.divide(token)}
+	|	{modulo} [token]:mod
+		{-> New binop.modulo(token)}
+	|	{eq} [token]:eq
+		{-> New binop.eq(token)}
+	|	{ne} [token]:neq
+		{-> New binop.ne(token)}
+	|	{lt} [token]:lt
+		{-> New binop.lt(token)}
+	|	{le} [token]:lteq
+		{-> New binop.le(token)}
+	|	{gt} [token]:gt
+		{-> New binop.gt(token)}
+	|	{ge} [token]:gteq
+		{-> New binop.ge(token)}
+	|	{and} [token]:and
+		{-> New binop.and(token)}
+	|	{or} [token]:or
+		{-> New binop.or(token)}
+	|	{xor} [token]:xor
+		{-> New binop.xor(token)}
+	|	{l_bit_shift} [token]:l_bit_shift
+		{-> New binop.l_bit_shift(token)}
+	|	{r_bit_shift} [token]:r_bit_shift
+		{-> New binop.r_bit_shift(token)}
+	;
+	
+
+    
+nestable_namespace_declaration {-> decl}
+	= {a} namespace identifier_dot_list l_brace member_declaration* r_brace
+		{-> New decl.temp_namespace(namespace, [identifier_dot_list.identifier], [member_declaration.decl], r_brace)}
+	;
+    
+property_declaration {-> decl}
+    = {a} visibility static? type_not_void identifier l_brace property_getter? property_setter? r_brace
+        {-> New decl.property(visibility.visibility_modifier, static, type_not_void.type, identifier, property_getter.block, property_setter.block)}
+    | {b} visibility static? type_not_void identifier l_brace property_setter property_getter r_brace
+        {-> New decl.property(visibility.visibility_modifier, static, type_not_void.type, identifier, property_getter.block, property_setter.block)}
+	| {c} visibility type_not_void this l_bracket [arg]:type_not_void identifier r_bracket l_brace property_getter? property_setter? r_brace
+		{-> New decl.this_array_property(visibility.visibility_modifier, type_not_void.type, this, arg.type, identifier, property_getter.block, property_setter.block)}
+    ;
+
+
+
+  
+property_getter {-> block}
+    = {a} get block
+        {-> block.block}
+    ;
+property_setter {-> block}
+    = {a} set block
+        {-> block.block}
+    ;
+    
+typedef_declaration {-> decl}
+    = {a} visibility static? typedef type named_type_not_generic semicolon
+        {-> New decl.typedef(visibility.visibility_modifier, static, typedef, type.type, named_type_not_generic.type)}
+    ;
+    
+trigger_declaration {-> decl}
+    = {a} visibility trigger identifier l_brace trigger_event_body?  trigger_cond_body?  trigger_action_body? r_brace
+        {-> New decl.trigger(visibility.visibility_modifier, identifier, trigger_event_body.events, trigger_event_body.block, trigger_cond_body.conditions, trigger_cond_body.block, trigger_action_body.actions, trigger_action_body.block)}
+    ;
+    
+trigger_event_body {-> events block}
+    = {a} events method_body
+        {-> events method_body.block}
+    ;
+
+trigger_cond_body {-> conditions block}
+    = {a} conditions method_body
+        {-> conditions method_body.block}
+    ; 
+    
+trigger_action_body {-> actions block}
+    = {a} actions method_body
+        {-> actions method_body.block}
+    ;
+
+	
+initializer_declaration {-> decl}
+    = {a}   initializer initializer_params optional_method_body
+        {-> New decl.initializer(initializer, [initializer_params.initializer_param], optional_method_body.block)}
+    ;
+    
+initializer_params {-> initializer_param*}
+    = {a}  
+        {-> []}
+    | {b} l_paren initializer_param_list r_paren
+        {-> [initializer_param_list.initializer_param]}
+    ;
+    
+initializer_param_list {-> initializer_param*}
+    = {a} 
+        {-> []}
+    | {b} initializer_param_list_not_empty
+        {-> [initializer_param_list_not_empty.initializer_param]}
+    ;
+
+initializer_param_list_not_empty {-> initializer_param*}
+    = {a} initializer_param
+        {-> [initializer_param.initializer_param]}
+    | {b} initializer_param_list_not_empty comma? initializer_param
+        {-> [initializer_param_list_not_empty.initializer_param, initializer_param.initializer_param]}
+    ;
+    
+initializer_param {-> initializer_param}
+    = {a} library_name assign string_literal
+        {-> New initializer_param.library_name(library_name, string_literal)}
+    | {b} library_version assign string_literal
+        {-> New initializer_param.library_version(library_version, string_literal)}
+    | {c} supported_versions assign string_literal
+        {-> New initializer_param.supported_versions(supported_versions, string_literal)}
+    | {d} required_libraries assign string_literal
+        {-> New initializer_param.required_libraries(required_libraries, string_literal)}
+    ;
+    
+include_declaration {-> decl}
+	= {a}	include string_literal
+			{-> New decl.include(include, string_literal)}
+	;
+	
+struct_declaration {-> decl}
+	= {a}	visibility struct struct_dimention? identifier generic_identifiers struct_enheritance? struct_body semicolon?
+			{-> New decl.struct(visibility.visibility_modifier, Null, struct_dimention.exp, Null, struct_body.r_brace, identifier, [generic_identifiers.identifier], struct_enheritance.type, [struct_body.local_decl])}
+	;
+	
+struct_enheritance {-> type}
+	= {a}	colon named_type
+		{-> named_type.type}
+	;
+
+class_declaration {-> decl}
+	= {a}	visibility class_token struct_dimention? identifier generic_identifiers struct_enheritance? struct_body semicolon?
+			{-> New decl.struct(visibility.visibility_modifier, class_token, struct_dimention.exp, Null, struct_body.r_brace, identifier, [generic_identifiers.identifier], struct_enheritance.type, [struct_body.local_decl])}
+	;
+	
+generic_identifiers {-> identifier*}
+	= {a}
+		{-> []}
+	| {b} lt identifier_list gt
+		{-> [identifier_list.identifier]}
+	;
+
+
+identifier_list {-> identifier*}
+	= {a} identifier
+		{-> [identifier]}
+	| {b} identifier_list comma identifier
+		{-> [identifier_list.identifier, identifier]}
+	;
+    
+enrichment_declaration {-> decl}
+	= {a}	enrichment struct_dimention? type_not_void enrichment_body semicolon?
+			{-> New decl.enrichment(enrichment, struct_dimention.exp, Null, enrichment_body.r_brace, type_not_void.type, [enrichment_body.decl])}
+	;
+enrichment_body {-> decl* r_brace}
+	= {a}	l_brace enrichment_element* r_brace
+			{-> [enrichment_element.decl] r_brace}
+	;
+	
+enrichment_element {-> decl}
+	= {a}	property_declaration
+			{-> property_declaration.decl}
+	| {b}	struct_method_declaration
+			{-> struct_method_declaration.decl}
+	| {c}	constructor_declaration
+			{-> constructor_declaration.decl}
+	| {d}	deconstructor_declaration
+			{-> deconstructor_declaration.decl}
+	;
+
+struct_dimention {-> exp}
+    = {a}   l_bracket expression r_bracket
+            {-> expression.exp}
+    ;
+	
+struct_body {-> local_decl* r_brace}
+	= {a}	l_brace struct_element* r_brace
+			{-> [struct_element.local_decl] r_brace}
+	;
+	
+struct_elements {-> local_decl*}
+	= {a}	struct_element
+			{-> [struct_element.local_decl]}
+	| {b}	struct_elements struct_element
+			{-> [struct_elements.local_decl, struct_element.local_decl]}
+	;
+	
+struct_element {-> local_decl}
+	= {a}	visibility static? const? type_not_void identifier variable_initializer? semicolon
+			{-> New local_decl.a(visibility.visibility_modifier, static, Null, Null, const, type_not_void.type, identifier, variable_initializer.exp)}
+	| {b}	struct_method_declaration
+			{-> New local_decl.decl(struct_method_declaration.decl)}
+	| {c}	constructor_declaration
+			{-> New local_decl.decl(constructor_declaration.decl)}
+	| {d}	deconstructor_declaration
+			{-> New local_decl.decl(deconstructor_declaration.decl)}
+    | {e}   property_declaration
+            {-> New local_decl.decl(property_declaration.decl)}
+	;
+
+// ********** Field declarations **********
+
+field_declaration {-> decl}
+	= {a}	visibility static? const? type_not_void identifier variable_initializer? semicolon
+		{-> New decl.field(visibility.visibility_modifier, static, const,
+				type_not_void.type,
+				identifier,
+				variable_initializer.exp)}
+	;
+
+// ********** Method declarations **********
+
+visibility {-> visibility_modifier}
+	= {a}
+		{-> New visibility_modifier.public()}
+	| {b} public
+		{-> New visibility_modifier.public()}
+	| {c} private
+		{-> New visibility_modifier.private()}
+	| {d} protected
+		{-> New visibility_modifier.protected()}
+	;
+
+method_declaration {-> decl}
+	= {a}	visibility trigger? static? native? inline? delegate? type identifier /*generic_identifiers*/
+			method_params optional_method_body
+		{-> New decl.method(visibility.visibility_modifier, trigger, static, native, inline, delegate,
+				type.type, identifier,
+				//[generic_identifiers.identifier],
+				[method_params.local_decl],
+				optional_method_body.block)}
+	;
+    
+constructor_declaration {-> decl}
+	=	visibility identifier method_params base_constructor_call method_body
+		{-> New decl.constructor(visibility.visibility_modifier, identifier,
+				[method_params.local_decl],
+				[base_constructor_call.exp],
+				method_body.block)}
+	;
+	
+deconstructor_declaration {-> decl}
+	=	visibility tilde identifier method_params method_body
+		{-> New decl.deconstructor(visibility.visibility_modifier, identifier,
+				[method_params.local_decl],
+				method_body.block)}
+	;
+
+base_constructor_call {-> exp*}
+	= {a}
+		{-> []}
+	| {b} colon base l_paren argument_list r_paren
+		{-> [argument_list.exp]}
+	;
+
+	
+struct_method_declaration {-> decl}
+	= {a}	visibility static? inline? type identifier /*generic_identifiers*/
+			method_params method_body
+		{-> New decl.method(visibility.visibility_modifier, Null, static, Null, inline, Null, type.type, identifier,
+			    //[generic_identifiers.identifier],
+				[method_params.local_decl],
+				method_body.block)}
+	;
+
+
+method_params {-> local_decl*}
+	= {a}	l_paren formal_parameter_list r_paren
+		{-> [formal_parameter_list.local_decl]}
+	;
+
+formal_parameter_list {-> local_decl*}
+	= {a}
+		{-> []}
+	| {b}	formal_parameter_list_nonempty
+		{-> [formal_parameter_list_nonempty.local_decl]}
+	;
+
+formal_parameter_list_nonempty {-> local_decl*}
+	= {a}	formal_parameter
+		{-> [formal_parameter.local_decl]}
+	| {b}	formal_parameter_list_nonempty comma formal_parameter
+		{-> [formal_parameter_list_nonempty.local_decl, formal_parameter.local_decl]}
+	;
+
+formal_parameter {-> local_decl}
+	= {a}	ref? out? type_not_void identifier
+		{-> New local_decl.a(New visibility_modifier.public(), Null, ref, out, Null, type_not_void.type, identifier, Null)}
+	;
+
+
+method_body {-> block}
+	= {a}	block
+		{-> block.block}
+	;
+
+optional_method_body {-> block?}
+	= {a}	method_body
+		{-> method_body.block}
+	| {b}	semicolon
+		{-> Null}
+	;
+
+
+
+// ********** Types **********
+
+
+type {-> type}
+	= {a}	void
+		{-> New type.void(void)}
+	| {b}   type_not_void
+        {-> type_not_void.type}
+	;
+	
+type_not_void {-> type}
+	= {b}	element_type
+		{-> element_type.type}
+	| {c}	array_type
+		{-> array_type.type}
+	| {e}	dynamic_type
+		{-> dynamic_type.type}
+	;
+    
+dynamic_type {-> type}
+    = {e}	dynamic_array_type
+		{-> dynamic_array_type.type}
+    | {d}   pointer_type
+        {-> pointer_type.type}
+    ;
+    
+pointer_type {-> type}
+    = {a} type_not_void star
+        {-> New type.pointer(star, type_not_void.type)}
+    ;
+
+element_type {-> type}
+	= {b}	named_type
+		{-> named_type.type}
+	;
+
+array_type {-> type}
+	= {a}	type_not_void l_bracket expression r_bracket
+		{-> New type.array_temp(l_bracket, type_not_void.type, expression.exp, Null)}
+	;
+    
+dynamic_array_type {-> type}
+    = {a}   type_not_void l_bracket r_bracket
+        {-> New type.dynamic_array(l_bracket, type_not_void.type)}
+    ;
+
+named_type {-> type}
+	= {a}	named_type_not_generic
+		{-> named_type_not_generic.type}
+	| {c}	generic_type
+		{-> generic_type.type}
+	;
+	
+generic_type {-> type}
+	= {a}	named_type_not_generic lt type_list gt
+		{-> New type.generic(lt, named_type_not_generic.type, [type_list.type])}
+	;
+    
+named_type_not_generic {-> type}
+	= {a}	name
+		{-> New type.named(name)}
+	;
+	
+type_list {-> type*}
+	= {a} type
+		{-> [type.type]}
+	| {b} type_list comma type
+		{-> [type_list.type, type.type]}
+	;
+
+
+// ********** Blocks and statements **********
+
+block {-> block l_brace}
+	= {a}	l_brace statement_or_declaration* r_brace
+		{-> New block.a([statement_or_declaration.stm], r_brace) l_brace}
+	;
+
+/*local_variable_declaration {-> local_decl}
+	= {a}	const? named_type identifier variable_initializer?
+		{-> New local_decl.a(Null, Null, Null, const, named_type.type,
+				identifier,
+				variable_initializer.exp)}
+	/*| {shady} const? array_type identifier? shady_variable_initializer?
+		{-> New local_decl.shady(const, array_type.type, identifier, shady_variable_initializer.assignop, shady_variable_initializer.exp)}
+	;*/
+	
+shady_variable_initializer {-> assignop exp}
+	= {a}	assignment_op expression
+		{-> assignment_op.assignop expression.exp}
+	;
+
+variable_initializer {-> exp}
+	= {a}	assign expression
+		{-> expression.exp}
+	;
+
+statement_or_declaration {-> stm}
+	= {a}	statement
+		{-> statement.stm}
+//	| {b}	local_variable_declaration_statement
+//		{-> local_variable_declaration_statement.stm}
+	;
+
+statement {-> stm}
+	= {a}	statement_without_trailing_substatement
+		{-> statement_without_trailing_substatement.stm}
+	| {b}	if_then_statement
+		{-> if_then_statement.stm}
+	| {c}	if_then_else_statement
+		{-> if_then_else_statement.stm}
+	| {d}	while_statement
+		{-> while_statement.stm}
+	| {e}	for_statement
+		{-> for_statement.stm}
+    | {f}   async_invoke_statement
+        {-> async_invoke_statement.stm}  
+    | {g}   switch_statement
+        {-> switch_statement.stm}
+	;
+    
+
+    
+switch_statement {-> stm}
+    = {a} switch l_paren expression r_paren l_brace switch_cases_optional_default r_brace
+        {-> New stm.switch(switch, expression.exp, [switch_cases_optional_default.stm])}
+    ;
+
+switch_cases_optional_default {-> stm*}
+    = {a} switch_cases_no_default
+        {-> [switch_cases_no_default.stm]}
+    | {c} switch_cases_no_default switch_case_default
+        {-> [switch_cases_no_default.stm, switch_case_default.stm]}
+    ;    
+
+switch_cases_no_default {-> stm*}
+    = {a} 
+        {-> []}
+    | {b} switch_cases_no_default switch_case_case
+        {-> [switch_cases_no_default.stm, switch_case_case.stm]}
+    ;
+    
+switch_case_case {-> stm}
+    = {a} case expression colon statement*
+        {-> New stm.switch_case(New switch_case_type.case(case, expression.exp), New block.a([statement.stm], Null))}
+    ;
+    
+switch_case_default {-> stm}
+    = {a} default colon statement*
+        {-> New stm.switch_case(New switch_case_type.default(default), New block.a([statement.stm], Null))}
+    ;
+    
+async_invoke_statement {-> stm}
+    = {a} async_invoke lt variable_lvalue gt l_paren argument_list r_paren semicolon
+        {-> New stm.async_invoke(async_invoke, variable_lvalue.lvalue, [argument_list.exp])}
+    ;
+    
+ 
+        
+namespace_identifier {-> identifier}
+    = {a} identifier dot
+        {-> identifier}
+    ;
+
+statement_no_short_if {-> stm}
+	= {a}	statement_without_trailing_substatement
+    	{-> statement_without_trailing_substatement.stm}
+	| {b}	if_then_else_statement_no_short_if
+		{-> if_then_else_statement_no_short_if.stm}
+	| {c}	while_statement_no_short_if
+		{-> while_statement_no_short_if.stm}
+	| {d}	for_statement_no_short_if
+		{-> for_statement_no_short_if.stm}
+	;
+
+statement_without_trailing_substatement {-> stm}
+	= {a}	block
+		{-> New stm.block(block.l_brace, block.block)}
+	| {b}	empty_statement
+		{-> empty_statement.stm}
+	| {c}	expression_statement
+		{-> expression_statement.stm}
+	| {d}	return_statement
+		{-> return_statement.stm}
+	| {e}	break_statement
+		{-> break_statement.stm}
+	| {f}	continue_statement
+		{-> continue_statement.stm}		
+	| {g}	delete_statement
+		{-> delete_statement.stm}		
+	;
+
+/*local_variable_declaration_statement {-> stm}
+	= {a}	local_variable_declaration semicolon
+		{-> New stm.local_decl(semicolon, local_variable_declaration.local_decl)}
+	;*/
+
+break_statement {-> stm}
+	= {a}	break semicolon
+		{-> New stm.break(break)}
+	;
+	
+continue_statement {-> stm}
+	= {a}	continue semicolon
+		{-> New stm.continue(continue)}
+	;
+	
+return_statement {-> stm}
+	= {a}	return semicolon
+		{-> New stm.void_return(return)}
+	| {b}	return expression semicolon
+		{-> New stm.value_return(return, expression.exp)}
+	;
+   
+delete_statement {-> stm}
+    = {a}   delete expression semicolon
+        {-> New stm.delete(delete, expression.exp)}
+    ;
+
+
+empty_statement {-> stm}
+	= {a}	semicolon
+		{-> New stm.empty(semicolon)}
+	;
+
+expression_statement {-> stm}
+	= {a}	statement_expression semicolon
+		{-> New stm.exp(semicolon, statement_expression.exp)}
+	;
+
+if_then_statement {-> stm}
+	= {a}	if l_paren expression r_paren statement
+		{-> New stm.if_then(l_paren, expression.exp, statement.stm)}
+	;
+
+if_then_else_statement {-> stm}
+	= {a}	if l_paren expression r_paren
+			[true_statement]:statement_no_short_if
+			else [false_statement]:statement
+		{-> New stm.if_then_else(l_paren, expression.exp, 
+				true_statement.stm, false_statement.stm)}
+	;
+
+if_then_else_statement_no_short_if {-> stm}
+	= {a}	if l_paren expression r_paren
+			[true_statement]:statement_no_short_if
+			else [false_statement]:statement_no_short_if
+		{-> New stm.if_then_else(l_paren, expression.exp, 
+				true_statement.stm, false_statement.stm)}
+	;
+
+for_init {-> stm}
+	= {a} 	expression_statement
+		{-> expression_statement.stm}
+	/*| {b}	local_variable_declaration_statement
+		{-> local_variable_declaration_statement.stm}*/
+	| {c}	semicolon
+		{-> New stm.empty(semicolon)}
+	;
+	
+for_update {-> stm}
+	= {a}	semicolon statement_expression
+		{-> New stm.exp(semicolon, statement_expression.exp)}
+	| {b}	semicolon
+		{-> New stm.empty(semicolon)}
+	;
+	
+for_statement {-> stm}
+	= {a}	for l_paren for_init [cond]:lazy_or_expression? for_update r_paren [body]:statement
+		{-> New stm.for(l_paren, for_init.stm, cond.exp, for_update.stm, body.stm)}
+//		{-> New stm.block(Null, New block([for_init.stm, New stm.while(l_paren, cond.exp, New stm.block(Null, New block([body.stm, for_update.stm])))]))}
+	;
+	
+
+	
+
+	
+for_statement_no_short_if {-> stm}
+	= {a}	for l_paren for_init [cond]:lazy_or_expression? for_update r_paren [body]:statement_no_short_if
+		{-> New stm.for(l_paren, for_init.stm, cond.exp, for_update.stm, body.stm)}
+//		{-> New stm.block(Null, New block([for_init.stm, New stm.while(l_paren, cond.exp, New stm.block(Null, New block([body.stm, for_update.stm])))]))}
+	;
+
+
+while_statement {-> stm}
+	= {a}	while l_paren expression r_paren [body]:statement
+		{-> New stm.while(l_paren, expression.exp, body.stm)}
+	;
+
+while_statement_no_short_if {-> stm}
+	= {a}	while l_paren expression r_paren [body]:statement_no_short_if
+		{-> New stm.while(l_paren, expression.exp, body.stm)}
+	;
+	
+
+// ********** Literals and names **********
+
+literal {-> exp}
+	= {a}	integer_literal
+		{-> New exp.int_const(integer_literal)}
+    | {f}	hex_literal
+		{-> New exp.hex_const(hex_literal)}
+	| {g}	octal_literal
+		{-> New exp.octal_const(octal_literal)}
+	| {b}	fixed_literal
+		{-> New exp.fixed_const(fixed_literal)}
+	| {c}	boolean_literal
+		{-> New exp.boolean_const(boolean_literal.bool)}
+	| {d}	string_literal
+		{-> New exp.string_const(string_literal)}
+	| {h}	char_literal
+		{-> New exp.char_const(char_literal)}
+	| {e}	null_literal
+		{-> New exp.null()}
+	;
+	
+int_literal {-> exp}
+	= {a}	integer_literal
+		{-> New exp.int_const(integer_literal)}
+    | {f}	hex_literal
+		{-> New exp.hex_const(hex_literal)}
+	| {g}	octal_literal
+		{-> New exp.octal_const(octal_literal)}
+	;
+
+boolean_literal {-> bool}
+	= {a}	true
+		{-> New bool.true()}
+	| {b}	false
+		{-> New bool.false()}
+	;
+
+null_literal {-> }
+	= {a}	null
+		{-> }
+	;
+
+name {-> name}
+	= {a}	identifier_dot_list
+		{-> New name.a([identifier_dot_list.identifier])}
+	;
+
+
+
+// ********** Expressions **********
+
+
+
+statement_expression {-> exp}
+	= {a}	assignment
+		{-> assignment.exp}
+	| {b}	method_invocation
+		{-> method_invocation.exp}
+	;
+	
+array_index {-> lvalue}
+	= {a}	primary_not_array l_bracket expression r_bracket
+		{-> New lvalue.array(l_bracket, primary_not_array.exp, expression.exp)}
+	;
+    
+/*stars_one_or_more {-> star*}
+    = {a} stars_zero_or_more star 
+        {-> [stars_zero_or_more.star, star]}
+    ;
+    
+stars_zero_or_more {-> star*}
+    = {a}
+        {-> []}
+    | {b} stars_zero_or_more star
+        {-> [stars_zero_or_more.star, star]}
+    ;*/
+    
+    
+pointer {-> lvalue}
+	= {a}	star [star2]:star* primary_not_literal
+		{-> New lvalue.pointer_multi([star, star2], primary_not_literal.exp)}
+	;
+
+primary {-> exp}
+	= {a}	literal
+		{-> literal.exp}
+	| {b}	left_hand_side
+		{-> New exp.lvalue(left_hand_side.lvalue)}
+	| {c}	l_paren expression r_paren
+		{-> New exp.paren(expression.exp)}
+	| {d}	method_invocation
+		{-> method_invocation.exp}
+    | {e}   instance_creation_expression
+        {-> instance_creation_expression.exp}
+    | {f}   delegate_creation_expression
+        {-> delegate_creation_expression.exp}
+	;
+    
+primary_not_literal {-> exp}
+	= {b}	left_hand_side_not_pointer
+		{-> New exp.lvalue(left_hand_side_not_pointer.lvalue)}
+	| {c}	l_paren expression r_paren
+		{-> New exp.paren(expression.exp)}
+	| {d}	method_invocation
+		{-> method_invocation.exp}
+    | {e}   instance_creation_expression
+        {-> instance_creation_expression.exp}
+    | {f}   delegate_creation_expression
+        {-> delegate_creation_expression.exp}
+	;
+	
+primary_not_pointer {-> exp}
+	= {a}	literal
+		{-> literal.exp}
+	| {b}	left_hand_side_not_pointer
+		{-> New exp.lvalue(left_hand_side_not_pointer.lvalue)}
+	| {c}	l_paren expression r_paren
+		{-> New exp.paren(expression.exp)}
+	| {d}	method_invocation
+		{-> method_invocation.exp}
+    | {e}   instance_creation_expression
+        {-> instance_creation_expression.exp}
+    | {f}   delegate_creation_expression
+        {-> delegate_creation_expression.exp}
+	;
+	
+primary_not_pointer_not_name {-> exp}
+	= {a}	literal
+		{-> literal.exp}
+	| {b}	left_hand_side_not_pointer_not_name
+		{-> New exp.lvalue(left_hand_side_not_pointer_not_name.lvalue)}
+	| {c}	l_paren expression r_paren
+		{-> New exp.paren(expression.exp)}
+	| {d}	method_invocation
+		{-> method_invocation.exp}
+    | {e}   instance_creation_expression
+        {-> instance_creation_expression.exp}
+    | {f}   delegate_creation_expression
+        {-> delegate_creation_expression.exp}
+	;
+	
+/*primary_dot_stuff {-> exp}
+	= {a} primary_not_pointer
+		{-> primary_not_pointer.exp}
+	| {b} name lt argument_list gt
+		{-> New exp.static_generic_type(lt, name.name, [argument_list.exp])}
+	;*/
+	
+/*generic_base {-> identifier}
+	= {a} identifier dot
+		{-> identifier}
+	;*/
+	
+
+//Must not to go a single name
+primary_not_array {-> exp}
+	= {a}	literal
+		{-> literal.exp}
+	| {c}	left_hand_side_not_pointer
+		{-> New exp.lvalue(left_hand_side_not_pointer.lvalue)}
+	| {d}	l_paren expression r_paren
+		{-> New exp.paren(expression.exp)}
+	| {f}	method_invocation
+		{-> method_invocation.exp}
+    /*| {e}   instance_creation_expression
+        {-> instance_creation_expression.exp}*/
+	;
+
+instance_creation_expression {-> exp}
+    = {a} new type_not_void l_paren argument_list r_paren
+        {-> New exp.new(new, type_not_void.type, [argument_list.exp])}
+    ;
+
+
+delegate_creation_expression {-> exp}
+    = {a} delegate lt named_type gt l_paren simple_left_hand_side r_paren
+        {-> New exp.delegate(delegate, named_type.type, simple_left_hand_side.lvalue)}
+    ;
+
+        
+
+
+argument_list {-> exp*}
+	= {a}
+		{-> []}
+	| {b}	argument_list_nonempty
+		{-> [argument_list_nonempty.exp]}
+	;
+
+argument_list_nonempty {-> exp*}
+	= {a}	expression
+		{-> [expression.exp]}
+	| {b}	argument_list_nonempty comma expression
+		{-> [argument_list_nonempty.exp, expression.exp]}
+	;
+
+method_invocation {-> exp}
+	= {c}	identifier /*generic_invocation*/ l_paren argument_list r_paren
+		{-> New exp.simple_invoke(identifier, /*[generic_invocation.type],*/ [argument_list.exp])}
+	| {d}	primary_not_pointer struct_dot_type identifier /*generic_invocation*/ l_paren argument_list r_paren
+			{-> New exp.nonstatic_invoke(primary_not_pointer.exp, struct_dot_type.dot_type, identifier, /*[generic_invocation.type],*/ [argument_list.exp])}
+	| {a}   sync_invoke lt variable_lvalue gt l_paren argument_list r_paren
+        {-> New exp.sync_invoke(sync_invoke, variable_lvalue.lvalue, [argument_list.exp])}
+	;
+    
+/*generic_invocation {-> type*}
+	= {a}
+		{-> []}
+	| {b} lt type_list gt
+		{-> [type_list.type]}
+	;*/
+
+
+postfix_expression {-> exp}
+	= {a}	primary
+			{-> primary.exp}
+	| {e}	postfix_expression_not_primary
+			{-> postfix_expression_not_primary.exp}
+	;
+	
+postfix_expression_not_primary {-> exp}
+	= {e}	left_hand_side plus_plus
+		{-> New exp.inc_dec(left_hand_side.lvalue, New inc_dec_op.post_inc(plus_plus))}
+	| {f}	left_hand_side minus_minus
+		{-> New exp.inc_dec(left_hand_side.lvalue, New inc_dec_op.post_dec(minus_minus))}
+	;
+    
+postfix_expression_not_pointer {-> exp}
+	= {a}	primary_not_pointer
+			{-> primary_not_pointer.exp}
+	| {e}	postfix_expression_not_primary_not_pointer
+			{-> postfix_expression_not_primary_not_pointer.exp}
+	;
+    
+postfix_expression_not_primary_not_pointer {-> exp}
+	= {e}	left_hand_side_not_pointer plus_plus
+		{-> New exp.inc_dec(left_hand_side_not_pointer.lvalue, New inc_dec_op.post_inc(plus_plus))}
+	| {f}	left_hand_side_not_pointer minus_minus
+		{-> New exp.inc_dec(left_hand_side_not_pointer.lvalue, New inc_dec_op.post_dec(minus_minus))}
+	;
+    
+unary_expression_not_plus_minus_not_pointer {-> exp}
+	= {a}	postfix_expression_not_pointer
+		{-> postfix_expression_not_pointer.exp}
+	| {c}	complement unary_expression
+		{-> New exp.unop(New unop.complement(complement), unary_expression.exp)}
+    | {cast} l_paren expression r_paren  unary_expression_not_plus_minus_not_pointer
+        {-> New exp.temp_cast(l_paren, expression.exp, unary_expression_not_plus_minus_not_pointer.exp)}
+	| {sharp_cast} [s1]:sharp type_not_void? [s2]:sharp unary_expression_not_plus_minus_not_pointer
+		{-> New exp.sharp_cast(s1, type_not_void.type, unary_expression_not_plus_minus_not_pointer.exp)}
+	;
+	
+unary_expression_not_plus_minus {-> exp}
+	= {a}	postfix_expression
+		{-> postfix_expression.exp}
+	| {c}	complement unary_expression
+		{-> New exp.unop(New unop.complement(complement), unary_expression.exp)}
+    | {cast} l_paren expression r_paren  unary_expression_not_plus_minus_not_pointer
+        {-> New exp.temp_cast(l_paren, expression.exp, unary_expression_not_plus_minus_not_pointer.exp)}
+	| {sharp_cast} [s1]:sharp type_not_void? [s2]:sharp unary_expression_not_plus_minus_not_pointer
+		{-> New exp.sharp_cast(s1, type_not_void.type, unary_expression_not_plus_minus_not_pointer.exp)}
+//    | {cast2} l_paren identifier star r_paren  unary_expression_not_plus_minus_not_pointer
+//        {-> New exp.cast(l_paren, New type.pointer(star, New type.named(identifier, Null)), unary_expression_not_plus_minus_not_pointer.exp)}
+	;
+    
+pointer_target_expression {-> exp}
+    = {a}   unary_expression_not_plus_minus
+		{-> unary_expression_not_plus_minus.exp}
+   /* | {b}   star pointer_target_expression
+        {-> New exp.unop(New unop.pointer_target(star), pointer_target_expression.exp)}*/
+    ;
+
+unary_expression {-> exp}
+	= {a}	pointer_target_expression
+		{-> pointer_target_expression.exp}
+	| {b}	minus unary_expression
+		{-> New exp.unop(New unop.negate(minus), unary_expression.exp)}	
+	| {c} prefix_expression_not_primary
+		{-> prefix_expression_not_primary.exp}
+	;
+
+prefix_expression_not_primary {-> exp}
+	= {c} plus_plus left_hand_side
+		{-> New exp.inc_dec(left_hand_side.lvalue, New inc_dec_op.pre_inc(plus_plus))}
+	| {d} minus_minus left_hand_side
+		{-> New exp.inc_dec(left_hand_side.lvalue, New inc_dec_op.pre_dec(minus_minus))}
+	;
+
+multiplicative_expression {-> exp}
+	= {a}	unary_expression
+		{-> unary_expression.exp}
+	| {b}	multiplicative_expression star unary_expression
+		{-> New exp.binop(multiplicative_expression.exp,
+				New binop.times(star),
+				unary_expression.exp)}
+	| {c}	multiplicative_expression div unary_expression
+		{-> New exp.binop(multiplicative_expression.exp,
+				New binop.divide(div),
+				unary_expression.exp)}
+	| {d}	multiplicative_expression mod unary_expression
+		{-> New exp.binop(multiplicative_expression.exp,
+				New binop.modulo(mod),
+				unary_expression.exp)}
+	;
+
+additive_expression {-> exp}
+	= {a}	multiplicative_expression
+		{-> multiplicative_expression.exp}
+	| {b}	additive_expression plus multiplicative_expression
+		{-> New exp.binop(additive_expression.exp,
+				New binop.plus(plus),
+				multiplicative_expression.exp)}
+	| {c}	additive_expression minus multiplicative_expression
+		{-> New exp.binop(additive_expression.exp,
+				New binop.minus(minus),
+				multiplicative_expression.exp)}
+	;
+
+bit_shift_expression {-> exp}
+	= {add}		additive_expression
+				{-> additive_expression.exp}
+	| {left}	bit_shift_expression l_bit_shift additive_expression
+				{-> New exp.binop(bit_shift_expression.exp,
+						New binop.l_bit_shift(l_bit_shift),
+						additive_expression.exp)}
+	| {right}	bit_shift_expression r_bit_shift additive_expression
+				{-> New exp.binop(bit_shift_expression.exp,
+						New binop.r_bit_shift(r_bit_shift),
+						additive_expression.exp)}
+	;
+
+relational_expression {-> exp}
+	= {add}		bit_shift_expression
+				{-> bit_shift_expression.exp}
+	| {lt}		relational_expression lt bit_shift_expression
+				{-> New exp.binop(relational_expression.exp,
+						New binop.lt(lt),
+						bit_shift_expression.exp)}
+	| {gt}		relational_expression gt bit_shift_expression
+				{-> New exp.binop(relational_expression.exp,
+						New binop.gt(gt),
+						bit_shift_expression.exp)}
+	| {lteq}	relational_expression lteq bit_shift_expression
+				{-> New exp.binop(relational_expression.exp,
+						New binop.le(lteq),
+						bit_shift_expression.exp)}
+	| {gteq}	relational_expression gteq bit_shift_expression
+				{-> New exp.binop(relational_expression.exp,
+						New binop.ge(gteq),
+						bit_shift_expression.exp)}
+	;
+
+
+equality_expression {-> exp}
+	= {a}	relational_expression
+    {-> relational_expression.exp}
+	| {b}	equality_expression eq relational_expression
+		{-> New exp.binop(equality_expression.exp,
+				New binop.eq(eq),
+				relational_expression.exp)}
+	| {c}	equality_expression neq relational_expression
+		{-> New exp.binop(equality_expression.exp,
+				New binop.ne(neq),
+				relational_expression.exp)}
+	;
+	
+
+
+and_expression {-> exp}	
+	= {a}	equality_expression
+		{-> equality_expression.exp}
+	| {b}	and_expression and equality_expression
+		{-> New exp.binop(and_expression.exp,
+				New binop.and(and),
+				equality_expression.exp)}
+	;
+
+exclusive_or_expression {-> exp}
+	= {a}	and_expression
+		{-> and_expression.exp}
+	| {b}	exclusive_or_expression xor and_expression
+		{-> New exp.binop(exclusive_or_expression.exp,
+				New binop.xor(xor),
+				and_expression.exp)}
+	;
+
+inclusive_or_expression {-> exp}	
+	= {a}	exclusive_or_expression
+		{-> exclusive_or_expression.exp}
+	| {b}	inclusive_or_expression or exclusive_or_expression
+		{-> New exp.binop(inclusive_or_expression.exp,
+				New binop.or(or),
+				exclusive_or_expression.exp)}
+	;
+
+lazy_and_expression {-> exp}
+	= {a}	inclusive_or_expression
+		{-> inclusive_or_expression.exp}
+	| {b}	lazy_and_expression and_and inclusive_or_expression
+		{-> New exp.binop(lazy_and_expression.exp,
+				New binop.lazy_and(and_and),
+				inclusive_or_expression.exp)}
+	;
+
+lazy_or_expression {-> exp}
+	= {a}	lazy_and_expression
+		{-> lazy_and_expression.exp}
+	| {b}	lazy_or_expression or_or lazy_and_expression
+		{-> New exp.binop(lazy_or_expression.exp,
+				New binop.lazy_or(or_or),
+				lazy_and_expression.exp)}
+	;
+	
+if_expression {-> exp}
+	= {a}	lazy_or_expression
+    	{-> lazy_or_expression.exp}
+	| {b}	lazy_or_expression questionmark expression colon if_expression
+		{-> New exp.if(questionmark, lazy_or_expression.exp, expression.exp, if_expression.exp)}
+	;
+
+expression {-> exp}
+	= {a}	if_expression
+    	{-> if_expression.exp}
+	| {b}	left_hand_side assign expression
+		{-> New exp.assignment(assign, left_hand_side.lvalue, expression.exp)}
+	;
+
+
+
+assignment {-> exp}
+	= {a}	const? left_hand_side_not_pointer generic_type_list assignment_dynamic_ops1 assignment_right_sides
+				{-> New exp.shady_s_assignment(const, 
+                        [],
+						left_hand_side_not_pointer.lvalue,
+						generic_type_list.lt,
+						[generic_type_list.type],
+                        [assignment_dynamic_ops1.shady_dynamic_ops],
+						[assignment_right_sides.local_decl_right])}
+    | {d}	pointer assign expression
+				{-> New exp.assignment(assign, pointer.lvalue, expression.exp)}
+	| {b}	postfix_expression_not_primary
+			{-> postfix_expression_not_primary.exp}
+	| {c}	prefix_expression_not_primary
+			{-> prefix_expression_not_primary.exp}
+	;
+	
+	
+generic_type_list {-> lt? type*}
+	= {a}
+		{-> Null []}
+	| {b} lt type_list gt
+		{-> lt [type_list.type]}
+	;
+    
+assignment_dynamic_ops1 {-> shady_dynamic_ops*}
+    = {a} 
+        {-> []}
+    | {b} assignment_dynamic_ops2
+        {-> [assignment_dynamic_ops2.shady_dynamic_ops]}
+    ;
+
+assignment_dynamic_ops2 {-> shady_dynamic_ops*}
+    = {a} assignment_pure_dynamic_op
+        {-> [assignment_pure_dynamic_op.shady_dynamic_ops]}
+    | {b} assignment_dynamic_ops2 assignment_dynamic_op
+        {-> [assignment_dynamic_ops2.shady_dynamic_ops, assignment_dynamic_op.shady_dynamic_ops]}
+    ;
+    
+    
+assignment_dynamic_op {-> shady_dynamic_ops}
+    = {a} assignment_pure_dynamic_op
+        {-> assignment_pure_dynamic_op.shady_dynamic_ops}
+    | {b} l_bracket expression r_bracket
+        {-> New shady_dynamic_ops.array(l_bracket, expression.exp)}
+    ;
+    
+assignment_pure_dynamic_op {-> shady_dynamic_ops}
+    = {a} star
+        {-> New shady_dynamic_ops.pointer(star)}
+    | {b} l_bracket r_bracket
+        {-> New shady_dynamic_ops.array(l_bracket, Null)}
+    ;
+ 
+    
+    
+assignment_right_sides {-> local_decl_right*}
+    = {a} assignment_right_side
+        {-> [assignment_right_side.local_decl_right]}
+    | {b} assignment_right_sides comma assignment_right_side
+        {-> [assignment_right_sides.local_decl_right, assignment_right_side.local_decl_right]}
+    ;
+    
+assignment_right_side {-> local_decl_right}
+    = {a}   identifier? right_hand_side?
+        {-> New local_decl_right.a(identifier, right_hand_side.assignop, right_hand_side.exp)}
+    ;
+	
+right_hand_side {-> assignop exp}
+	= {a}	assignment_op expression
+			{-> assignment_op.assignop expression.exp}
+	;
+	
+	
+assignment_op {-> assignop}
+	= {assign}	assign
+				{-> New assignop.assign(assign)}
+	| {add}		assign_add
+				{-> New assignop.add(assign_add)}
+	| {sub}		assign_sub
+				{-> New assignop.sub(assign_sub)}
+	| {mul}		assign_mul
+				{-> New assignop.mul(assign_mul)}
+	| {div}		assign_div
+				{-> New assignop.div(assign_div)}
+	| {mod}		assign_mod
+				{-> New assignop.mod(assign_mod)}
+	;
+    
+   
+left_hand_side {-> lvalue}
+	= {a}	name
+		{-> New lvalue.ambiguous_name(name.name)}
+	| {d} 	escape_global dot identifier
+		{-> New lvalue.field(identifier)}
+	| {e} 	struct dot identifier
+		{-> New lvalue.struct_field(identifier)}
+	| {b}	struct_lvalue
+		{-> struct_lvalue.lvalue}
+	| {f}	pointer
+		{-> pointer.lvalue}   
+	| {c}	array_index
+		{-> array_index.lvalue}
+    | {g}   this
+        {-> New lvalue.this(this)}
+    | {h}   value
+        {-> New lvalue.value(value)}
+	;
+	
+variable_lvalue {->lvalue}
+	= {a} 	name
+		{-> New lvalue.ambiguous_name(name.name)}
+	| {b}	struct_lvalue
+		{-> struct_lvalue.lvalue}
+	;
+  
+struct_lvalue {-> lvalue}
+	= {a} primary_not_pointer_not_name dot identifier
+		{-> New lvalue.struct(primary_not_pointer_not_name.exp, New dot_type.dot(dot), identifier)}
+	| {b} primary_not_pointer arrow identifier
+		{-> New lvalue.struct(primary_not_pointer.exp, New dot_type.arrow(arrow), identifier)}
+	;
+    
+left_hand_side_not_pointer {-> lvalue}
+	= {a}	name
+		{-> New lvalue.ambiguous_name(name.name)}
+	| {c}	array_index
+		{-> array_index.lvalue}
+	| {d} 	escape_global dot identifier
+		{-> New lvalue.field(identifier)}
+	| {e} 	struct dot identifier
+		{-> New lvalue.struct_field(identifier)}
+	| {b}	struct_lvalue
+		{-> struct_lvalue.lvalue}
+    | {g}   this
+        {-> New lvalue.this(this)}
+    | {h}   value
+        {-> New lvalue.value(value)}
+	;
+	
+left_hand_side_not_pointer_not_name {-> lvalue}
+	= {c}	array_index
+		{-> array_index.lvalue}
+	| {d} 	escape_global dot identifier
+		{-> New lvalue.field(identifier)}
+	| {e} 	struct dot identifier
+		{-> New lvalue.struct_field(identifier)}
+	| {b}	struct_lvalue
+		{-> struct_lvalue.lvalue}
+    | {g}   this
+        {-> New lvalue.this(this)}
+    | {h}   value
+        {-> New lvalue.value(value)}
+	;
+	
+/*left_hand_side_dot_stuff {-> lvalue}
+	= {a} left_hand_side_not_pointer
+		{-> left_hand_side_not_pointer.lvalue}
+	;*/
+    
+simple_left_hand_side {-> lvalue}
+	= {a}	name
+		{-> New lvalue.ambiguous_name(name.name)}
+	| {b}	struct_lvalue
+		{-> struct_lvalue.lvalue}
+	;
+
+struct_dot_type {-> dot_type}
+    = {a}   dot
+        {-> New dot_type.dot(dot)}
+    | {b}   arrow
+        {-> New dot_type.arrow(arrow)}
+    ;
+	
+
+		
+
+
+/*******************************************************************
+ * Abstract Syntax Tree                                            *
+ *******************************************************************/
+Abstract Syntax Tree
+
+
+source_file
+	= {a}	decl* [name]:identifier? [usings]:decl*
+	;
+
+program
+	= {a}	[source_files]:source_file*
+	;
+
+name
+	=	{a} identifier*
+	;
+
+
+
+
+decl
+	=	{field} visibility_modifier static? const?  type
+		[name]:identifier
+		[init]:exp?
+    |   {property} visibility_modifier static? type [name]:identifier [getter]:block? [setter]:block?
+	|	{this_array_property} visibility_modifier type [token]:this [arg_type]:type [arg_name]:identifier [getter]:block? [setter]:block?
+	|	{method} visibility_modifier trigger? static? native? inline? delegate?
+		[return_type]:type
+		[name]:identifier
+		//[generic_vars]:identifier*
+		[formals]:local_decl*
+		block?
+	|	{include} 
+		[token]:include
+		[name]:string_literal
+	|	{struct}
+		visibility_modifier
+        class_token?
+        [dimention]:exp?
+        [int_dim]:integer_literal?
+		[end_token]:r_brace
+		[name]:identifier
+		[generic_vars]:identifier*
+		[base]:type?
+		[locals]:local_decl*	
+	|	{enrichment}
+        [token]:enrichment
+        [dimention]:exp?
+        [int_dim]:integer_literal?
+		[end_token]:r_brace
+		type
+		decl*		
+	|	{using}
+		[namespace]:identifier*
+    |   {preload_bank} [token]:preload_bank [bank]:string_literal [player]:exp	
+    |   {initializer} [token]:initializer initializer_param* [body]:block?
+    |   {trigger} visibility_modifier [name]:identifier [event_token]:events? [events]:block? [conditions_token]:conditions? [conditions]:block?  [actions_token]:actions? [actions]:block?
+    |   {typedef} visibility_modifier static? [token]:typedef [type]:type [name]:type
+    | {constructor} visibility_modifier [name]:identifier
+		[formals]:local_decl*
+		[base_args]:exp*
+		block
+    | {deconstructor} visibility_modifier [name]:identifier
+		[formals]:local_decl*//No formals are actually allowed, but move that to weeder
+		block
+	| {namespace} [token]:namespace
+		[name]:identifier
+		decl*
+		[end_token]:r_brace?
+	| {temp_namespace} [token]:namespace
+		[name]:identifier*
+		decl*
+		[end_token]:r_brace?
+	| {operator} visibility_modifier static? [return_type]:type [token]:operator [operator]:binop [formals]:local_decl* block
+	| {enum} visibility_modifier static? [token]:enum [name]:identifier [values]:enum_local* [end_token]:r_brace
+	;
+	
+enum_local
+	= {a} [name]:identifier [value]:exp?
+	;
+ 
+initializer_param
+    =   {library_name} [token]:library_name [name]:string_literal
+    |   {library_version} [token]:library_version [name]:string_literal
+    |   {supported_versions} [token]:supported_versions [name]:string_literal
+    |   {required_libraries} [token]:required_libraries [name]:string_literal
+    ;
+    
+local_decl
+	= {a} visibility_modifier static? ref? out? const? type [name]:identifier [init]:exp?
+    | {multi} const? type local_decl_right*
+	//| {shady}	const? type local_decl_right*
+	| {decl} decl
+	;
+    
+visibility_modifier
+	= {public}
+	| {private}
+	| {protected}
+	;
+
+
+
+type
+	=	{void} [token]:void
+	//|	{array} [token]:l_bracket [dimention]:integer_literal type 
+	|	{array_temp} [token]:l_bracket type [dimention]:exp [int_dim]:integer_literal?
+    |   {dynamic_array}  [token]:l_bracket type
+	|	{named} name
+	|	{null} // Not created by grammar
+    |   {pointer} [token]:star type
+	|	{generic} [token]:lt [base]:type [generic_types]:type*
+	;
+
+
+
+block = {a} [statements]:stm* [token]:r_brace?;
+
+stm
+	=	{exp} [token]:semicolon exp
+	|	{if_then} [token]:l_paren [condition]:exp [body]:stm
+	|	{if_then_else} [token]:l_paren [condition]:exp [then_body]:stm [else_body]:stm
+	|	{while} [token]:l_paren [condition]:exp [body]:stm
+	|	{empty} [token]:semicolon
+	|	{block} [token]:l_brace block
+	|	{void_return} [token]:return
+	|	{value_return} [token]:return exp
+	|	{local_decl} [token]:semicolon local_decl
+	|	{break} [token]:break
+	|	{continue} [token]:continue
+	|	{for} [token]:l_paren [init]:stm [cond]:exp? [update]:stm [body]:stm
+    |   {async_invoke} [token]:async_invoke [name]:lvalue [args]:exp*
+    |   {switch} [token]:switch [test]:exp [cases]:stm*
+    |   {switch_case} [type]:switch_case_type [block]:block
+    |   {delete} [token]:delete exp
+	;
+    
+switch_case_type
+    = {case} [token]:case exp
+    | {default} [token]:default
+    ;
+    
+
+
+exp
+	=	{binop} [left]:exp binop [right]:exp
+	|	{unop} unop exp
+	|	{inc_dec} lvalue inc_dec_op
+	|	{int_const} integer_literal
+	|	{hex_const} hex_literal
+    |	{octal_const} octal_literal
+	|	{fixed_const} fixed_literal
+	|	{string_const} string_literal
+    |   {char_const} char_literal
+	|	{boolean_const} bool
+	|	{null}
+	|	{simple_invoke} [name]:identifier /*[generics]:type**/ [args]:exp*
+	|	{nonstatic_invoke} [receiver]:exp dot_type [name]:identifier /*[generics]:type**/ [args]:exp*
+    |   {sync_invoke} [token]:sync_invoke [name]:lvalue [args]:exp*
+	|	{lvalue} lvalue
+	|	{assignment} [token]:assign lvalue exp
+	|	{s_assignment} assignop lvalue exp
+	|	{shady_s_assignment} const? [pre_pointers]:star* lvalue [generic_token]:lt? [generic_types]:type* [post_pointers]:shady_dynamic_ops* local_decl_right*
+	|	{paren} exp
+    |   {cast} [token]:l_paren [type]:type exp
+    |   {temp_cast} [token]:l_paren [type]:exp exp
+	|	{sharp_cast} [token]:sharp [type]:type? exp
+    |   {new} [token]:new type [args]:exp*
+    |   {delegate} [token]:delegate type lvalue
+    |   {delegate_invoke} [token]:identifier [receiver]:exp [args]:exp*
+	|	{if} [token]:questionmark [cond]:exp [then]:exp [else]:exp
+	|	{array_resize} [token]:identifier [base]:exp [arg]:exp
+	//|	{static_type} type // Not created by grammar
+	//|	{static_generic_type} [token]:lt name [generic_types]:type*
+	//|	{static_pointer_type} [token]:star [base]:exp
+	;
+    
+shady_dynamic_ops
+    = {pointer} [token]:star
+    | {array} [token]:l_bracket exp?
+    ;
+    
+local_decl_right
+    = {a} [name]:identifier? assignop? [init]:exp?
+    ;
+	
+assignop
+	=	{assign} [token]:assign
+	|	{add} [token]:assign_add
+	|	{sub} [token]:assign_sub
+	|	{mul} [token]:assign_mul
+	|	{div} [token]:assign_div
+	|	{mod} [token]:assign_mod
+	;
+
+lvalue
+	=	{local} [name]:identifier // Not created by grammar
+	|	{type} [name]:identifier // Not created by grammar	
+	|	{field} [name]:identifier
+    |   {property} [name]:identifier // Not created by grammar
+	|	{namespace} [name]:identifier // Not created by grammar
+	|	{struct_field} [name]:identifier 
+	|	{struct} [receiver]:exp dot_type [name]:identifier
+	|	{array} [token]:l_bracket [base]:exp [index]:exp
+    |   {pointer_multi} [tokens]:star* [base]:exp
+    |   {pointer} [tokens]:star [base]:exp
+	|	{ambiguous_name} [ambiguous]:name
+    |   {p_array_length} [base]:exp
+	|	{array_length} [base]:exp
+    |   {this} [token]:this
+    |   {value} [token]:value
+	//|	{static} [name]:identifier // Not created by grammar
+ 	;
+	
+
+    
+dot_type
+    = {dot} [token]:dot
+    | {arrow} [token]:arrow
+    ;
+
+bool
+	=	{true}
+	|	{false}
+	;
+
+binop
+	=	{plus} [token]:plus
+	|	{minus} [token]:minus
+	|	{times} [token]:star
+	|	{divide} [token]:div
+	|	{modulo} [token]:mod
+	|	{eq} [token]:eq
+	|	{ne} [token]:neq
+	|	{lt} [token]:lt
+	|	{le} [token]:lteq
+	|	{gt} [token]:gt
+	|	{ge} [token]:gteq
+	|	{and} [token]:and
+	|	{or} [token]:or
+	|	{xor} [token]:xor
+	|	{lazy_and} [token]:and_and
+	|	{lazy_or} [token]:or_or
+	|	{l_bit_shift} [token]:l_bit_shift
+	|	{r_bit_shift} [token]:r_bit_shift
+	|	{aeq} [token]:eq // Not created by grammar
+	|	{ane} [token]:neq // Not created by grammar
+	|	{concat} [token]:plus // Not created by grammar
+	;
+
+unop
+	=	{negate} [token]:minus
+	|	{complement} [token]:complement
+	|	{boolean_to_string} // Not created by grammar
+	|	{byte_to_string} // Not created by grammar
+	|	{short_to_string} // Not created by grammar
+	|	{int_to_string} // Not created by grammar
+	|	{char_to_string} // Not created by grammar
+	|	{object_to_string} // Not created by grammar
+	;
+	
+inc_dec_op
+	=	{pre_inc} [token]:plus_plus
+	|	{pre_dec} [token]:minus_minus
+	|	{post_inc} [token]:plus_plus
+	|	{post_dec} [token]:minus_minus
+	;
+

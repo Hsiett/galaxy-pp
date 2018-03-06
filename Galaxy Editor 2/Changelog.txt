@@ -1,0 +1,672 @@
+﻿2018/03/06 12:00
+
+1, Add support to extract precompiled.libraryData and access the texture from the new Casc file system using CascLib(https://github.com/ladislav-zezula/CascLib).
+2, Can extract all libraries from user created MODs. They should reside in the default MOD folder as usual. Currently, it only search for user mods in the sub-folders of MOD.
+3, Upgrade to .Net 4.0 Framework with xna 4.0. The project can be compiled in win10 with VS 2015 community version.
+
+2012/08/14 20:11
+change the main entry name from InitMap() to InitMap();
+
+Started: 23 Febuary 2011 17:26
+
+Ideas:
+New features
+* Hotkeys for new files/folders
+* Cut and paste of files/folders, in addition to drag
+* Option for compile on save
+* Search definition need an indication of where that definition is
+* Open/close all brackets
+* Open/close all brackets below cursor
+* A right click menu would be nice, including usual stuff like c&p etc etc.
+* Option to write as many statments on same line as possible.
+* static struct methods
+* Rightclick -> Go to definition, find usages
+* When text is marked and { is pressed, insert a {} around marked text
+* Load any script files (not only project files)
+* Runtime pointer checks <--- you seem to have forgotten something here >:(
+* End hunger
+* Support for mod files. [save script to mod(no InitMap(), or root files needed), and load mod as an dependancy(look in/modify map dependancies)]
+	Need more info to make it propper. Need a naming map from the galaxy++ mod code to the galaxy version contained in the mod (if the user wrote the mod in galaxy++)
+
+	Looking trough what I need to do to add support for mod files. at first glance, it might seem really easy.. but there some stuff to be done - the generated file shouldn't be renamed to Mapscript, and there are no main entry in mods. \\
+If I'm gonna do it, I also want to allow for loading dependencies. \\
+What is saved in the mods are raw galaxy code, so I am going to need to be able to generate and parse a naming map, so people can still refer to the normal galaxy names.. Also, for the decl names int the map script - they can must be renamed to not collide with anything from the dependencies' raw galaxy.
+
+It would probably be these naming maps that would be specified as dependencies rather than an actual mod file. (since the code in the mods might be secret, apart from the names of public declarations, and the actual mod file might not be available)
+
+To avoid any name clash between dependencies, all declarations in a mod has to contain some unique part, like a mod id.
+
+It must be possible to generate a naming map based on current galaxy code, without renaming any declarations (for current galaxy and gui mods).
+
+The initializes of the mods have to be called from the map code. \\
+GUI mods also have a special initializer function (they are a collection of libraries, each of which has an initializer). Assuming the GUI code is converted to script by the normal editor, and a naming map is generated from that, the init function would have to be identified among potential custom script functions.
+
+What is the generated script file(s) in GUI mods going to be called? - they must be included.
+
+A rather annoying problem - all the G{{{++}}} code for generic types would have to be saved in the naming map, since structs would need to be generated based on the users choice for the generic types. 
+
+If I really want to be thorough, I could make a service for creators of mods to upload the naming map to my server, so my editor would look at the map dependencies, and load the naming map from my server automatically.
+
+I might also need to add another visibility modifier for stuff private to the mod.
+
+So.. yeah. allowing to save the script to mods is just a matter of activating a bit of commented code.  But loading dependencies call for a bit of work. : /
+
+* Support for libraries (SC2Lib) - Requires GUI to galaxy++ compiler
+* Option to not auto indent
+* Option to set the spaces used in indentation.
+* Cast struct types down + overriding 
+	Require all data to be saved when casting up - not practical with the array solution
+	Also requires an aditional field to save the runtime type of objects.
+* Add interfaces (properties, methods) = delegates in subclasses
+
+Reworking of current features
+* On run, if starcraft is open, send a message to starcraft about loading a new map (how..?!)
+* Custom hotkeys
+* In find, if esc pressed, hide
+* Watch files for external changes. Offer reloading if changed.
+* Change delegates to use triggers (like sync invoke, with a variable trigger)
+* Change sync/async invokes to use arrays instead of the data table to send arguments
+
+Bugs
+
+* Something with if(...){} <--- {} indentation
+* Array indexes must be of integer type (not byte variables)
+
+- UNABLE TO REPLICATE
+* Some exception with ctrl v
+- UNABLE TO REPLICATE
+* Autocompletion for namespace globals not working correctly (suggesting non namespace stuff)
+* Not possible to search after the start of the search has been reached
+- UNABLE TO REPLICATE
+* Creating a new file or folder and not renaming it immediately causes an unhandled exception, so does trying to rename a file and then cancelling it.
+- UNABLE TO REPLICATE
+* un-intending multiple lines by pressing CTRL + Tab results in an unhandled exception
+//* The suggestion box tooltip is not hidden <--- hidden, but not fixed (now it never shows)
+- UNABLE TO REPLICATE
+* You can still change code while the compiler works. After this, every try to compile throws an unhandled exception.
+- UNABLE TO REPLICATE
+If you select text from bottom to top and press shift + tab to remove an intendation, you get an unhandled exception. If the text was selected from top to botton, you don't.
+
+Not likely
+* Option to use pure galaxy
+
+
+
+Galaxy syntax highlighting only on output script
+Don't include native lib if not needed
+
+
+
+
+3.1.0
+* Fixed an issue where pointers to a byte would be fetched as int when used as an array index.
+* Fixed an error that occured when the compiler tried to inline a method called from a field declaration.
+* It is now possible to save an open project under a different name.
+* It is now possible to open an existing project G++ project, that has not yet been added to the list of projects.
+From Slarti:
+* The editor now parses libraries from starcraft at startup, so libraries are always updated.
+* Fixed a bug in the MakeBackups method of the MpqEditor class to also remove backups of component style maps.
+* The editor now checks the registry for the location of Starcraft II before asking the user.
+
+3.0.8
+* Indexing an array with a byte will now be transformed to be valid galaxy code.
+* Fixed an issue where no suggestions would be shown in the suggestion list after a cast.
+* Fixed a bug where Invoke<this->foo>() caused an error.
+* Rightclick->insert->Constructor now properly works with dialog script files, and structs inside namespaces.
+* Fixed an error that occured when writing Foo->bar(), with Foo being a class (The code will not compile, but it no longer crashes the compilation thread).
+* You can now mark typedefs as private, public(default), and static.
+* Fixed an issue where MinValue, MaxValue and value properties in a dialog would be written in the script as ex. 1,2 instead of 1.2
+* Fixed en error caused by an if-then-else statement not having a following statement.
+
+3.0.7
+* Fixed an issue where the compiler would sometimes not make error reports link to their source file.
+* Fixed an issue where custom operator methods sometimes wasn't renamed to a propper method name.
+* Fixed an issue in liveness analysis related to nested if-elses.
+* Fixed an error in constant folding when parsing expressions like <int constant> + (<int constant> + <int constant>).
+* Fixed some items not showing up on the suggestion list.
+
+v 3.0.6
+* Fixed an issue where references to value in property setters didn't get proccesed correctly, and caused invalid code.
+
+v 3.0.5
+* Added array properties (type1 this[type2 index] {get{...}set{...}}) - see documentation.
+* Implemented operator overloading for most binary operators. See documentation.
+* Added enums - see documentation.
+
+v 3.0.2
+* Fixed an error where certain characters could not be entered.
+
+v 3.0.1
+* Fixed an issue where usings was not correctly handled.
+* Added a rightclick->Go to Declaration button.
+* Fixed an issue that caused typedefs to be unusable.
+* Added an error message if non-dynamic arrays of size <= 0 is defined.
+* Pressing ctrl+space now brings up the suggestion list.
+* Fixed some issues with the suggestion list not always showing all the items it should show.
+
+v 3.0.0
+* Pointer null checks are now reliable. See documentation.
+* Added nested namespaces - see documentation for details.
+* Added a UnitFilter generator, same place as the map object browser.
+* Trigger variables used to call initializers and trigger event sections are now destroyed after use.
+* Pressing ctrl + left/right now moves the caret to previous/next token.
+* Fixed an issue where Data table remove was not considered a write to the data table, when optimizing.
+* Fixed an issue where the optimizer could move statements over a wait call.
+* The compiler will now remove any declarations of non-dynamic arrays with size 0.
+* Fixed a bug in the optimizer, that chould cause unused local assignments to wreak havoc.
+* Fixed an error that could occur if a user made a large number of dependancies between files.
+* Please note: A lot of changes has gone into this release. It might not be as stable as previous releases. As always, you have the option to downgrade at "Help->Change to another version".
+
+v 2.9.5
+* In a previous release, I made it it impossible to reference static fields and properties from inside a struct/class without typing <class name>.<field name>. This was a mistake and has been reverted.
+* You can now select an error message, and press ctrl-c to copy it as text to the clipboard.
+* Fixed an issue where properties used in base constructors would cause invalid code.
+* Fixed an issue where subclassing a class with a property in it would sometimes cause an error.
+* Fixed.. stuff related to Sync/Async invoke parameters.
+* Fixed an issue where making constant variables in a method would result in an error.
+* Fixed an issue where renaming a folder to same name, but different case would cause an error.
+* Fixed an issue where a previous update incorrectly disallowed the expression (myInt & 1) because 1 is considered a byte.
+* The program now has a list of recent projects when it is launched from the start menu.
+
+v 2.9.4
+* Fixed an issue in the new optimizations phase that could cause incorrect code.
+* Fixed an issue where the return value of properties was not type checked.
+* Fixed an issue where the compiler incorrectly accepted & | and ^ operaters between a byte and an integer.
+
+v 2.9.3
+* Fixed an error that occured when calling a static method from inside a static method in the same struct, where the called method is defined later.
+* Fixed an error refferencing static properties.
+* Fixed an issue where map backups was not removed, when they reached the maximum number of backups.
+* Rewrote entire optimizations phase, for improved compile time performance.
+* Fixed an issue where invalid galaxy could be output, when having something like foo.bar().baz(), where bar() returns an enriched type.
+* Removed Code.SC2Data/TriggerLibs/TestNatives.galaxy from the precompiled library (it is not included from anywhere, and is not valid galaxy).
+
+v 2.9.2
+* Fixed an error that could occur if a dialog was opened, and the editor didn't know where SCII was.
+* Fixed an issue where creating a new instance of an array based class with no fields, would result in invalid output code. 
+* Added constant folding for boolean expressions.
+* The compiler now optimizes "if (<constant>)" and removes "while (false)"
+* Fixed an error that occured when making properties of delegate type.
+* Fixed an error that occured when defining a static field, that had a new expression in its initializer.
+* Fixed an error that occured when editing a file in a folder, then renaming the folder, and saving the file.
+* Fixed an error that occured when deleting a non empty folder.
+* Optimized unique naming phase.
+
+v 2.9.1
+* Fixed an issue where using compile and save from a project not in the default Projects folder would cause an error.
+* SharedClasses.dll did not get properly updated in previous release. As a result, no errors could be reported.
+
+v 2.9.0
+* Fixed an issue where expression ifs could be given the wrong type.
+* People now get a message when creating a dialog if they don't have xna installed.
+* Fixed an issue where calling .lengh for an array type that got it length from a static const struct field would yield an incorrect value.
+* Fixed an issue where calling (foo(bar->baz())), with foo being a struct method, would cause the compiler to crash.
+* It is now possible to create projects in another folder than the /Projects folder.
+* Added more status bar information about the "Transforming code" stage.
+* Added an option to include the code of the current project, in the error reports. (This is mostly only relevant for errors when compiling.)
+
+v 2.8.9
+* Reduced a lot of compilation time resulting from having many source files.
+* Fixed an issue where when defining multiple enrichments of same type, properties could only be accessed for one of them.
+* Cut, copy and paste should now work properly with dialog source files.
+* Fixed an issue where (new Foo()->Bar()) would call Bar before the constructor of Foo.
+* Fixed an issue where assignments to a variable inside a while condition was not translated correctly
+* Setting the visible property of a dialog to true now shows the dialog as soon as it is created.
+
+
+v 2.8.8
+* Fixed an issue about the updater not being able to delete the Fonts directory.
+* Put dialog background texture out into the folder. Overwrite it to change the background.
+* Fixed an issue where the box displayed when creating new controls was positioned incorrectly when target screen height was not set to 1200.
+* Added the BlendState, Value, MinValue, MaxValue, SelectionIndex properties for dialog controls. (BlendState.Subtract is not displayed properly)
+* You can now nudge dialog controls with the arrow keys.
+* Added the progress bar dialog control.
+* Added the ability to set tintcolor and textstyle pr race. - These properties will be reset to default on existing dialog controls.
+* Fixed an issue where setting images and hover images pr races was not set propperly.
+* Added the slider dialog control.
+* Added the pulldown dialog control.
+* The autocomplete box will now properly update when dialogs controls are added, deleted or renamed.
+* Double clicking on an error/warning from a dialog code file will now properly jump to the place the error is.
+* Dialogs will now also be copied to map, if that option is selected in project properties.
+
+v 2.8.6
+* Fixed an issue where dialog background visible and dialog fullscreen was passed as strings.
+* Fixed an issue where the event pane could remain open if selecting a dialog.
+* Lowered the required pixel shader version from 3.0 to 2.0a.
+* Removed the imageType option from dialogs.
+* Added support for using .jpg, .png and .bmp images for dialogs and dialog controls.
+* Fixed an issue where text in listboxes could be displayed infront of a control lying infront of the listbox.
+
+v 2.8.5
+* Fixed an issue where it was not possible to use static const struct fields as struct/class/enrichment dimentions.
+* Disabled the posibilty to create new files, new folders, open in explore or set enabled state for libraries.
+* Fixed an issue where int.foo would crash if foo was not defined.
+* Fixed an issue where comparing struct variables with no locals in them caused a crash.
+* Fixed an issue where unused fields was not properly removed.
+* Added dialogs (sorry mexa :) ) - Consider this feature as being in alpha/beta stage. (not all dialog controls are implemented, but
+	a lot of code has been written, so there might be bugs)
+* Added Help->Report Error, for reporting errors that does not result in a crash.
+
+v 2.8.1
+* Fixed an issue where it was not possible to use static const struct fields as array dimentions.
+
+v 2.8.0
+* The editor no longer report constant fields as unused (they are removed).
+* Fixed an error where static struct fields before a nonstatic struct field that was refferenced in the struct could crash the editor.
+* The editor will now only report unused definitions if they are defined by the user.
+* Added a system for users to create and share libraries.
+* Added a Resize(int newSize) method to all dynamic arrays [array->Resize(2)]. It runs linear in the number of items removed - O(1) when increasing size.
+
+v 2.7.5
+* It is now possible to call methods with implicit casts. (void Print(string s){...} -> Print(2);)
+
+v 2.7.4
+* Fixed an error where it was not possible to test a map unless a file was called MapScript.
+
+v 2.7.3
+* Fixed a bug where -(a + b) was compiled to -a + b.
+* The error/warnigns box is now cleared when closing a project.
+* Fixed an error where the .galaxy++ extension was not shown when renaming a file.
+* Now validating project and folder names to avoid invalid names.
+* When the "one output file" option is selected, the output file will now always be called MapScript.galaxy.
+* When creating a new file/folder on top of a folder, the new file/folder will now be placed inside the folder.
+* Added an option to hide the map object browser.
+* Added an option to hide errors and/or warnings.
+* The editor no longer watches the harddrive for external changes to the project. (to fix unauthorized related crashes)
+
+v 2.7.2
+* Hopefully fixed the Unauthorized errors.
+* Fixed an issue regarding locals in switches.
+
+v 2.7.1
+* Updated library for latest SC II version.
+
+v 2.7.0
+* Optimized the compilation process for generics.
+* Changed the order of suggestion items slightly.
+* Added constant folding for integer types (for example transforms (2 + 3) / 2 into 2).
+* Added a right click menu to auto generate constructors.
+* Fixed an issue where structs and arrays types in the condition of an if wern't rejected.
+* Fixed an issue where the editor would be unable to extract unit/region/... data from the map if the map name has chineese letters.
+* Fixed an issue where extending a generic struct/class would cause an error.
+
+v 2.6.7
+* Fixed an issue where moving a file around could cause the editor to crash.
+
+v 2.6.6
+* Fixed an issue where the suggestions in deconstructors were wrong.
+
+v 2.6.5
+* The autocomplete list now hides after inserting when double clicked.
+* Fixed an issue where method calls from while conditions to inline methods would be translated incorrectly.
+* Fixed an issue where assignments to a variable used in a while conditions could be incorrectly optimized.
+* Fixed an issue where the code foo = new Str(foo); would be translated incorrectly.
+* The program now checks that you don't use invalid characters in file names.
+* The program now monitor the source files. If one is deleted on the hard drive, it is removed from the project. (It still doesn't monitor rename, create or move)
+* Added deconstructors (See documentation).
+* Fixed some other bugs.
+
+v 2.6.4
+* Added options to costimize how a map is run.
+* Added a change log (Help -> Change Log)
+
+v 2.6.3
+* An action body in triggers are no longer required
+* Multiple enrichments of same type can now be defined, as long as their contents don't conflict.
+
+v 2.6.2
+* The tooltip for the suggestion box now also shows the value of constants.
+
+v 2.6.1
+* Fixed an issue that prevented the tooltip for current method to show.
+
+v 2.6.0
+* Copying the contents of a large file has been optimized.
+* Fixed an issue where delegates sometimes caused a crash.
+* Structs classes and triggers can now be marked as private.
+* Fixed an issue where the suggestion list sometimes would show any suggestions.
+* Added a tooltip for the item currently selected in the suggestion box.
+
+v 2.5.7
+* To fix an issue that could cause invalid output code, arguments marked as out now need to be assignable from declaration to caller, and arguments marked as ref has to be assignable both ways.
+* Fixed an issue where constructor parameter tooltips wouldn't show when writing a new expression for generic types.
+* All windows will now calculate their size at runtime.
+* Fixed an issue where the compiler sometimes wouldn't check that method invocations has the correct number of arguments.
+
+v 2.5.6
+* Fixed a bug where the editor would sometimes keep the map file open.
+* Fixed an issue where having variables of struct type in a supertype of a struct would crash the compiler.
+* Fixed some other bugs.
+
+v 2.5.5
+* The suggestion box will now better give suggestions based on the type you are calling on.
+* Removed the # from the keywords
+* The #Invoke keyword is now called InvokeSync
+* The #trigger keyword is now called Trigger
+
+
+v 2.5.3
+* Fixed some bugs.
+
+v 2.5.2
+* Added static methods and properties for structs.
+
+v 2.5.0
+* Added a tool bar with some pretty buttons.
+* Added a right click menu with cut/copy/paste buttons. Also with pretty pictures.
+* Added a Map Object Browser, to give an overview of the units/doodads/regions/points/cameras placed in the map. Double click an item to insert it into the script.
+* Fixed some bugs.
+
+v 2.4.8
+* Added an optimization to merge similar methods.
+* Fixed an issue regarding pointers to integer based pointers.
+* Fixed an issue where some code was transformed incorrectly.
+
+v 2.4.7
+* Fixed an issue where a certain optimization could rewrite code incorrectly.
+
+v 2.4.6
+* Fixed a crash caused by string obfuscation.
+* Fixed a potential infinite loop in the script optimizations.
+
+v 2.4.5
+* Added an option to automatically inline small methods (less than 3 statements).
+* Added some optimizations to remove assignments to local variables that are only used once.
+* Added an option to keep the galaxy++ files in the map (in project properties).
+* You can now refere to struct variables from inside constructors without prefixing with #this.
+* Fixed an issue where fields who's type is a struct with no non static variables, was not removed.
+* Fixed some bugs.
+
+v 2.4.2
+* Fixed an issue with generics in some situations.
+* Fixed an issue where the compiler wouldn't cast from byte to text.
+* Fixed an issue where the editor wouldn't give suggestions for myNamespace.myField.<something>
+* Mouse wheel now scrolls 4 lines pr tick instead of 1.
+* Fixed an issue where locals declared in a for statement wouldn't be added to the suggestion list.
+* Optimized method inlining even more.
+* Added an option to change the font used in the editor.
+
+v 2.4.0
+* Added generics. See documentation.
+* Added visibility modifiers. See documentation.
+* Updated the native library.
+* Fixed some more bugs.
+
+v 2.3.7
+* Struct/class fields can now be marked as static. There will only be one instance of static struct variables.
+* Fixed an issue where the compiler would sometimes crash when all source files is in folders.
+* Added enheritance. See documentation. (Note: no overriding, or casts)
+* Fixed an issue where initialized struct variables would overwrite any assignments done in the declaration of a local variable.
+* Fixed an issue where creating a new object with a constructor sometimes caused a crash.
+* Optimized method inlining.
+
+v 2.3.5
+* It is now possible to initialize struct/class fields. This works for both dynamic and static types.
+* Struct variables can now be marked as const.
+* When possible, the compiler will now remove const variables and replace refferences to the variable with a copy of the initializer.
+* Fixed a crash that occured when using delegates.
+
+v 2.3.0
+* Fixed a bug that caused struct type variables as struct fields to crash the editor.
+* Fixed a bug that prevented one from refering to struct variables from a property inside a struct.
+* Had some lunch.
+* Added constructors for enrichments.
+* Added expression if's. See documentation.
+* Moved the update check out into it's own thread, so the program doesn't freeze when checking for updates.
+
+
+
+v2.2.5
+* Added enrichments. See documentation.
+* Tooltips will now wrap to next line instead of going out of the screen.
+* Fixed some bugs.
+
+v2.2.3
+* Fixed a bug that sometimes caused the compiler to crash
+
+v2.2.2
+* Fixed a bug that sometimes prevented autocompletion from working for pointer types.
+* Autocompletion now also works when indexing an array.
+* In the find and replace windows, only the textboxes can now have focus.
+* It is no longer allowed to have two methods with the same signature.
+* Added properties. See the documentation.
+
+v2.2.0
+* Made a change to fix some string opfucation errors.
+* The compiler now assigns the default value to a variable when merging, if the decl wasn't initialized
+* Fixed an error that occured when removing a typedef.
+* Added some options to customize text highlighting.
+* Fixed a bug that reset some project options each time the project was loaded.
+* Refactored the bulk copy system and #Invoke/#InvokeAsync system to take advantage of the pointer system, to easier facilitate pointers in global arrays instead of the data table.
+* To join more variables, structs in methods are now split into primitive/array type variables.
+* The editor now removes assignments which assigns a variable to itself.
+* Added array based pointers for struct types. See documentation
+* Fixed an error in indentation with } else {
+* Fixed an error where assignments from int to byte was not accepted.
+* Fixed an error where implicit casts did not work in return statements.
+* Fixed an error that caused page down to go to the end of the document.
+* Fixed an error where replace all reported one less than it actually replaced.
+	
+v2.1.7
+* Fixed a bug that made compile and save act as compile and save as
+* Fixed a bug where a project's properties could not be changed if the project directory had changed.
+* The editor now accepts + and - for points, like galaxy does.
+* Added typedefs. (typedef int* pInt;)
+* Fixed an error that made trigger definitions conflict incorrectly with some methods.
+
+
+v2.1.6
+* Fixed an error that apeard if the project input and output map was the same.
+* Removed a warning about string obfuscation not working in some cases.
+* Recoded the Search and replace feature
+
+v2.1.5
+* Fixed a syntax error in the output regarding structs not being placed before their use.
+* Worked on some other reported bugs.
+* The one output file option is now true by default.
+* You can now specify a default output map in project properties.
+* Added an option to never open saved files in the normal editor.
+* Added an option to not insert an } after a {
+* Changed the way string obfucation works. It should now work in all contexts.
+* Pressing page up or page down while the suggestion list is open will now scroll in the list
+* The editor now scrolls if the mouse is held down and moved out of the text area.
+* Added an option to open the previous project at launch.
+
+v2.1.2
+* Fixed a crash that occured when using some variable types in struct fields.
+
+v2.1.1
+* Fixed an error that allowed incompatible delegates to be assigned to eachother.
+
+v 2.1.0
+* Optimized multiple assignments.
+* Added delegates (function pointers). See the documentation.
+* Added support for "folder maps".
+
+v 2.0.5
+* Changed FTP server software. It won't send the size of files unless I ask nicely, so the update feature of previous versions doesn't work.
+* The caret now snaps better to the place where the user pressed. 
+* The editor now scroll horizontally when mouse button 4 and 5 are pressed.
+* Fixed a bug that made multiple assignments be assigned incorrectly.
+* Fixed a bug where the update of a for was not executed before a continue statement.
+* An IME (Input Method Editor) will now be positioned where the caret is.
+
+v 2.0.3
+* Fixed a crash when adding new files and not renaming them.
+* Added an way to downgrade to a previous version
+
+v 2.0.2
+* Fixed a bug that prevented chinese symbols from being inserted
+* Fixed the } error.
+* Added line numbers in error reports.
+
+v 2.0.1
+* Fixed some array out of bounds error in the editor.
+
+v 2.0.0
+* Fixed a crash that occured when unindenting lines, and having the cursor all the way to the left.
+* Pressing esc or similar, no longer inserts a char in the code.
+* The double click in the text editor now uses the settings from windows.
+* Implemented an error handeler. If a crash occurs, you will be prompted to send an error message to me.
+* Implemented an auto update feature.
+* Fixed some issues with navigating with the arrow keys while text was marked.
+
+v 1.9.3
+* Fixed a crash that occured when using some variable types in a dynamic context.
+* Fixed a bug where toggeling "Remove unused methods" would remove the action method for a trigger declaration.
+* Made some other small changes
+
+v 1.9.2
+* Removed all string obfuscation in fields.
+* Fixed a crash that occured if compiling twice while the compiler was working.
+* It is now possible to define structs without any fields in them.
+* Added constructors in structs
+* Added a class type, which functions like struct, but is transformed diffrently. Use for exclussively dynamic types.
+
+v 1.9.0
+* Added support for allowing characters in the range [0x0100 - 0xFFFF] to apear in strings and as identifiers.
+* Text coloring algorithm has been rewritten. Structs are no longer colored, and writing /*/*/* no longer results in an error.
+* Indentation algorithim has been rewritten due to some issues with the previous algorithm.
+* Varios warnings about the same thing has been joined into a single expandable error message.
+* Changed string obfuscation to work for fields without method calls in them.
+* Added a notation to quickly write triggers. See documentation.
+* Fixed a bug with the suggestion window that occured when scrolling down to the end.
+* Added an option to use tabs instead of 4 spaces.
+* Integer literals in the range [0, 255] are now considered bytes.
+* Added handle and char types (theese are also galaxy types)
+* Having no strings in a project will no longer result in an exception if string obfuscation is selected
+* Fixed a bug where pointer refferences inside a new expression would not be converted correctly.
+* Fixed an error where struct methods were not always declared before use in the output.
+
+
+v 1.8.0
+* Added pointers - see documentation for details
+* Fixed a crash that occured when scrolling the editor with the suggestion box open.
+* Fixed a crash that occured when obfuscating strings, and using the invoke expressions, or initializers.
+* The compile and save button is now grayed out when no project is loaded
+* Fixed a bug that caused pasting and undoing to not display the following lines correctly.
+* Fixed a bug where blocks were not correctly updated.
+* Using tab or shift+tab with no text marked now indents from the caret position.
+* The suggestion list now scrolls down if the selected item is not visible.
+* If the mouse is over the suggestion box, and you scroll, it will now scroll in the list.
+* The editor now remembers closed blocks when closed.
+
+
+v 1.7.7
+* Fixed a crash
+
+v 1.7.6
+* Fixed a crash that occured when referrencing a local inside an if
+* Added a status bar for the compile status.
+
+
+Release 1.7.5
+* Optimized the editor (for speed).
+* Added undo (ctrl Z and ctrl Y)
+* The compiler now properly shows the suggestion box after a return.
+* The compiler now gives an error if a local variable is used before it is declared.
+* The compiler now gives an error if two locals of the sma e name is created within the same scope.
+
+Release 1.7.1
+* Added implicit casts from fixed, int, bool and color to string, and from fixed, int, bool and string to text. (string foo = "foobar" + 2;)
+* Added cast expressions (int a = (int)2.2)
+* It is now possible to make multiple declarations in one decl (int a=2, b, c = a + 1;)
+* Fixed a crash that occured if renaming a file that was not open.
+* Fixed a crash that occured if EOF was encounterd unexpectetly, and the user double clicked the error message.
+* If pressing compile and run, the compilation fails, the error fixed and only copile pressed, it will no longer launch Starcraft II.
+* Fixed a bug that prevented the suggestion box to see first statement of an initializer as being inside a method.
+
+Release 1.7
+* The compiler now removes dead code (code that can not be reached by any execution paths)
+* Added support for switches.
+* Added support for people to define a library, it's supported versions and any other required libraries
+* Added support for initializers.
+* If no main entry is defined, one will be added
+* Added the #InvokeAsync keyword. Use this to run the target method in a new thread. It is not possible to get any return values from this. (#InvokeAsync<ns.method>(args..))
+* Added the #Invoke keyword. Use this to run a function in a new "trigger". Doing this will reset the ammount of operations you can do. (#Invoke<namespace.method>(args..))
+* Fixed a bug where multiple assignments in one statement caused a crash.
+* The editor now supports hexadecimal(0xaF) and octal(057) numbers.
+* GUI trigger data is now being removed from the map when compiling.
+* If you have a non-literal TriggerCreate, and two triggers of same name, the compiler now reports it as an error.
+* Fixed a bug where the compiler would not see renamed files as a reason to allow recompilation.
+* Fixed an error where the name of a renamed file would not change in the editing window.
+* When renaming files, if they don't end with ".galaxy++", instead of giving an error, the program will now just append it.
+* In the project view, dragging stuff on top of non empty folders no longer moves the item inside the target folder.
+* It's now possible to refference triggers from other namespaces (TriggerCreate("namespace1.foo")).
+* Fixed a bug that sometimes caused trigger refferences to refference the wrong trigger.
+* Fixed a bug where output files sometimes wouldn't open.
+* Fixed a crash that occured when pressing ctrl + f
+* Added an option for compile and save, for when you want to publish the map
+
+Release 1.6
+* Fixed an error where using short names could rename stuff to an elligal name
+* Added a way to call the gui function Preload Bank
+* Current line and pos of the cursor
+* Option to deactivate file
+* Added line numbers
+* Seperate compile and test hotkeys (F9, ctrl + F9)
+* On run, skip compile if no changes
+* Warnings of unused generated variables - remove them (fixed)
+* Compiling script files in hidden folders makes them unhidden (fixed)
+* On new folder/file, make default name
+* Custom sorting of folders and files
+* Added an option to obfuscate strings
+* The check for unused variables is now done before merging variables.
+* Fixed a bug that would give multidimentional arrays the wrong size.
+* Fixed a bug that created unnecessary bulkCopyVar variables.
+* Fixed a crash that occured when pressing ctrl-f with text marked.
+
+
+Release 5:
+Fixed a potential crash
+Added #ref and #out to the list of keywords (formatting and suggestions)
+Improved the mapping from pixel to textpoint in the editor
+
+Todo:
+When scrolling to the right in the editor, the text scrolls over the left margain
+
+
+Release 4:
+Added namespaces
+Extended list of avalible functions. Think I caught em all.
+Optimized the editor to reduce lag in large files.
+
+
+
+Release 3:
+Added ctrl + a
+Pressing tab with text marked will now indent marked lines instead of removing the marked text
+Fixed a crash that sometimes occured if marked text was removed.
+Fixed a bug that rejected null to be assigned to nullable types.
+Added find and replace
+
+
+
+Release 2:
+
+Big
+Added a function to compile and run the script (copy the script to your map, and test it in starcraft)
+Added a featuere to collapse blocks in the editor
+Changed i++: It now functions as you would expect from other languages
+Added ++i
+Fixed an error that gave an incorrect result when having multiple assignments to the same variable in the same statement
+Added an option to join all output files into one
+Added added an option to rename declarations to very short names
+The main form now remembers it's position and size when you close and open it
+Fixed a bug that prevented compiler from running, if a source file had been removed.
+Fixed a bug that caused struct variables to not be displayed in the suggestion list when inside struct methods.
+Added a go to line option (ctrl + g)
+Bulk copy parameters are now pr default passed value type
+Added #ref to specify that a parameter should be passed as refference type
+Added #out to specify that a parameter should function as an extra return value
+If the standard library is used, and no calls to initialize it is made by the user, the compiler now inserts a call.
+Fixed/improved some other bugs/features
+
+
+Small
+Shouldnt display argument tooltip in method declaration when type is void
+Improved auto indentation - now does it when ; or { is inserted
+Fixed a bug in the suggestion list - struct variables was added twice, and the scollbar was not being updated
+optimized #inline. while will only be there if needed
+now automatically calls standard lib init
+changed text formatting

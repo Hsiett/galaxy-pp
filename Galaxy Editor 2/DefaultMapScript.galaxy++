@@ -1,0 +1,24 @@
+﻿/* 
+ * Default Galaxy++ Mapscript.
+ * This script will do the same as the default script in the galaxy editor.
+ * 
+ * If you are new to the language, check out 
+ * http://www.sc2mapster.com/assets/galaxy-editor-beier/
+ * for the documentation.
+ * 
+ * See the about box if you wish to talk to me about bugs/suggestions.
+ */
+Trigger MeleeInitialization
+{
+	events
+	{
+		TriggerAddEventMapInit(MeleeInitialization);
+	}
+	actions
+	{
+		MeleeInitResources();
+		MeleeInitUnits();
+		MeleeInitAI();
+		MeleeInitOptions();
+	}
+}

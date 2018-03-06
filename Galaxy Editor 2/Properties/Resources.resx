@@ -1,0 +1,766 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FolderOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FolderOpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="events" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\events.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DefaultDialogBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Screenshot2011-11-13 14_07_13.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FolderClosed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FolderClosed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CutHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CutHS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PasteHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PasteHS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CopyHS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CopyHS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="serverPublicKey" xml:space="preserve">
+    <value>&lt;RSAKeyValue&gt;&lt;Modulus&gt;yUA7wd1+MXI8wrPj4F49shbdw6f3kQzD2pWji2MCRPliO7AG2iGxIIU35x5gdWpSPpCripl4/7eNX0fPFUEY8AM64Zkr/lEGZHz/u8q6TN3g0gbxgrAAS0Chwb+lF1Y5nny3Su2Edg1JH9CjdVfN5fsR8UICwInDb66FT9rHS8wyMxocCBSsgDdWoOzKamTguKesVCvciuCTPV7rLnBo+i6zyZyefwvkPSdjZtHegd69UIQPRNZJ+HC0MoOyV5mfvXWDweEfCxG3GfTpKM5vkFdE1rGIXhrvahxLHSIxc5zcbF2b+rwzEwu6L2jAcf002wWGaz9/SF+kBKiqO/26gumfz1wQ/I0LRcOc1cE9KkPWxOkw5fJZSyp3VZm2zjmzmTzdann146420+ZmLmX98czV+An3SDlM2LBUm7gXPOlhJE2gNiSpwIWrg226Aqou3IdiTt9GlyiUHFRryUaewAoE91mSQRPSWyGXb+DaNiX+nFFO1Jcq3rCWhpcbDStL&lt;/Modulus&gt;&lt;Exponent&gt;AQAB&lt;/Exponent&gt;&lt;/RSAKeyValue&gt;</value>
+    <comment>RSA Public Key</comment>
+  </data>
+  <data name="properties" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\properties.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="horizontalBorderEffect" xml:space="preserve">
+    <value>uniform extern texture ScreenTexture;    
+uniform extern float2 TextureSize;
+uniform extern float2 TargetPos;
+uniform extern float2 TargetSize;
+uniform extern float2 ScreenSize;
+uniform extern int BoxType;
+uniform extern bool Tiled;
+uniform extern float4 TintColor;
+uniform extern bool IsHalfTexture;
+uniform extern bool IsBottomHalf;
+
+const int BoxTypeSelection = 0;
+const int BoxTypeCreateNew = 1;
+
+float4x4 MatrixTransform;
+//uniform bool DrawResizeDots;
+//uniform extern float2 Boarder;//(TextureHeight/TargetWidth, TextureHeight/TargetHeight)
+
+void SpriteVertexShader(inout float4 vColor : COLOR0, inout float2 texCoord : TEXCOORD0, inout float4 position : POSITION0)
+{
+	position = mul(position, MatrixTransform);
+}
+
+sampler ScreenS = sampler_state
+{
+    Texture = &lt;ScreenTexture&gt;;    
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+float4 DrawResizeBox(int2 targetPixel, int2 TopLeft)
+{
+	float4 returner = float4(1, 1, 1, 1);//Default fill color
+	//Border
+	if (targetPixel.x == TopLeft.x)
+	{
+		//Left
+		if (targetPixel.y == TopLeft.y || targetPixel.y == TopLeft.y + 6)
+		{
+			returner = float4(0, 0, 0, 0);
+		}
+		else
+			returner = float4(0, 0, 0, 1);
+	}
+	else if (targetPixel.y == TopLeft.y)
+	{
+		//Top
+		if (targetPixel.x == TopLeft.x + 6)
+			returner = float4(0, 0, 0, 0);
+		else
+			returner = float4(0, 0, 0, 1);
+	}
+	else if (targetPixel.x == TopLeft.x + 6)
+	{
+		//Right
+		if (targetPixel.y == TopLeft.y + 6)
+			returner = float4(0, 0, 0, 0);
+		else
+			returner = float4(0, 0, 0, 1);
+	}
+	else if (targetPixel.y == TopLeft.y + 6)
+	{
+		//Bottom
+		returner = float4(0, 0, 0, 1);
+	}
+	return returner;
+}
+
+float4 SelectionBoxPS(float2 texCoord: TEXCOORD0) : COLOR0
+{
+	int2 TargetPixel = (int2)(texCoord * TargetSize);
+	float2 backgroundTextureCoord = (texCoord*TargetSize + TargetPos)/ScreenSize;
+	/*float4 edgeColor = 1 - tex2D(ScreenS, backgroundTextureCoord); 
+	edgeColor.a = 1;*/
+	float4 edgeColor = tex2D(ScreenS, backgroundTextureCoord); 
+	/*if (edgeColor.r &gt; 0.5)
+		edgeColor.r = 0;
+	else
+		edgeColor.r = 1;
+	if (edgeColor.g &gt; 0.5)
+		edgeColor.g = 0;
+	else
+		edgeColor.g = 1;*/
+	if (edgeColor.b &gt; 0.5)
+		edgeColor.b = 0;
+	else
+		edgeColor.b = 1;
+	edgeColor.a = 1;
+	float4 color = float4(1, 1, 1, 1);
+	//Dotted line 4 pixels in, gray (105/255) . . . . . .
+	//Selection dots 7x7 rectangle w/o corner pixels (black edge, white fill)
+
+	//First calculate dotted line color
+	if (TargetPixel.y == 3 &amp;&amp; TargetPixel.x &gt;= 3 &amp;&amp; TargetPixel.x &lt;= TargetSize.x - 4)
+	{
+		//Top border
+		if (BoxType != BoxTypeSelection || TargetPixel.x%2 != 0)
+			color = edgeColor;
+	}
+	else if (TargetPixel.x == 3 &amp;&amp; TargetPixel.y &gt;= 3 &amp;&amp; TargetPixel.y &lt;= TargetSize.y - 4)
+	{
+		//Left border
+		if (BoxType != BoxTypeSelection || TargetPixel.y%2 != 0)
+			color = edgeColor;
+	}
+	else if (TargetPixel.x == TargetSize.x - 4 &amp;&amp; TargetPixel.y &gt;= 3 &amp;&amp; TargetPixel.y &lt;= TargetSize.y - 4)
+	{
+		//Right border
+		if (BoxType != BoxTypeSelection ||  TargetSize.x % 2 == TargetPixel.y % 2)
+			color = edgeColor;
+	}
+	else if (TargetPixel.y == TargetSize.y - 4 &amp;&amp; TargetPixel.x &gt;= 3 &amp;&amp; TargetPixel.x &lt;= TargetSize.x - 4)
+	{
+		//Bottom border
+		if (BoxType != BoxTypeSelection || TargetSize.y % 2 == TargetPixel.x % 2)
+			color = edgeColor;
+	}
+	/*
+	//Then calculate if this should be a resize box
+	if (BoxType == BoxTypeSelection)
+	{
+		if (TargetPixel.x &lt; 7)
+		{
+			//Left edge
+			if (TargetPixel.y &lt; 7)
+			{
+				//Top left
+				color = DrawResizeBox(TargetPixel, int2(0, 0));
+			}
+			else if (TargetPixel.y &gt;= TargetSize.y - 7)
+			{
+				//Bottom left
+				color = DrawResizeBox(TargetPixel, int2(0, (int)TargetSize.y - 7));
+			}
+			else
+			{
+				//Middle left
+				int y = (int)TargetSize.y / 2 - 3;
+				if (TargetPixel.y &gt;= y &amp;&amp; TargetPixel.y &lt; y + 7)
+					color = DrawResizeBox(TargetPixel, int2(0, y));
+			}
+		}
+		else if (TargetPixel.y &lt; 7)
+		{
+			//Top edge
+			if (TargetPixel.x &gt;= TargetSize.x - 7)
+			{
+				//Top right
+				color = DrawResizeBox(TargetPixel, int2((int)TargetSize.x - 7, 0));
+			}
+			else
+			{
+				//Middle top
+				int x = (int)TargetSize.x / 2 - 3;
+				if (TargetPixel.x &gt;= x &amp;&amp; TargetPixel.x &lt; x + 7)
+					color = DrawResizeBox(TargetPixel, int2(x, 0));
+			}
+		}
+		else if (TargetPixel.y &gt;= TargetSize.y - 7)
+		{
+			//Bottom edge
+			if (TargetPixel.x &gt;= TargetSize.x - 7)
+			{
+				//Bottom right
+				color = DrawResizeBox(TargetPixel, int2((int)TargetSize.x - 7, (int)TargetSize.y - 7));
+			}
+			else
+			{
+				//Middle bottom
+				int x = (int)TargetSize.x / 2 - 3;
+				if (TargetPixel.x &gt;= x &amp;&amp; TargetPixel.x &lt; x + 7)
+					color = DrawResizeBox(TargetPixel, int2(x, (int)TargetSize.y - 7));
+			}
+		}
+		else if (TargetPixel.x &gt;= TargetSize.x - 7)
+		{
+			//Right edge
+			//Middle right
+			int y = (int)TargetSize.y / 2 - 3;
+			if (TargetPixel.y &gt;= y &amp;&amp; TargetPixel.y &lt; y + 7)
+				color = DrawResizeBox(TargetPixel, int2((int)TargetSize.x - 7, y));
+		}
+	}*/
+    return color;   
+}
+
+technique SelectionBox
+{
+    pass Pass0
+    {
+		VertexShader = compile vs_2_0 SpriteVertexShader();
+        PixelShader = compile ps_2_0 SelectionBoxPS();
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+float4 HorizontalBorderPS(float2 texCoord: TEXCOORD0) : COLOR
+{
+	float2 targetCoord = texCoord * TargetSize;
+	float2 edgeSize = float2(TextureSize.y, TextureSize.y);
+	if (TargetSize.x &lt; 2*edgeSize.x)
+		edgeSize.x = TargetSize.x/2;
+	if (TargetSize.y &lt; 2*edgeSize.y)
+		edgeSize.y = TargetSize.y/2;
+
+	//First, we should check what region we are in.
+	if (targetCoord.x &lt; edgeSize.x)
+	{
+		if (targetCoord.y &lt; edgeSize.y)
+		{
+			//Top left
+			texCoord.x = targetCoord.x/(TextureSize.y*10);
+			texCoord.y = targetCoord.y/TextureSize.y;
+		}
+		else if (TargetSize.y - targetCoord.y &lt; edgeSize.y)
+		{
+			//Bottom left
+			texCoord.x = targetCoord.x/(TextureSize.y*10) + 0.2;
+			texCoord.y = (targetCoord.y - TargetSize.y + TextureSize.y)/TextureSize.y;
+		}
+		else
+		{
+			//Left border
+			texCoord.x = targetCoord.x/(TextureSize.y*10) + 0.6;
+			texCoord.y = ((targetCoord.y - edgeSize.y)/TextureSize.y)%1;
+		}
+	}
+	else if (TargetSize.x - targetCoord.x &lt; edgeSize.x)
+	{
+		if (targetCoord.y &lt; edgeSize.y)
+		{
+			//Top right
+			texCoord.x = (targetCoord.x - TargetSize.x + TextureSize.y)/(TextureSize.y*10) + 0.1;
+			texCoord.y = targetCoord.y/TextureSize.y;
+		}
+		else if (TargetSize.y - targetCoord.y &lt; edgeSize.y)
+		{
+			//Bottom right
+			texCoord.x = (targetCoord.x - TargetSize.x + TextureSize.y)/(TextureSize.y*10) + 0.3;
+			texCoord.y = (targetCoord.y - TargetSize.y + TextureSize.y)/TextureSize.y;
+		}
+		else
+		{
+			//Right border
+			texCoord.x = (targetCoord.x - TargetSize.x + TextureSize.y)/(TextureSize.y*10) + 0.7;
+			texCoord.y = ((targetCoord.y - edgeSize.y)/TextureSize.y)%1;
+		}
+	}
+	else
+	{
+		if (targetCoord.y &lt; edgeSize.y)
+		{
+			//Top border
+			texCoord.x = ((targetCoord.x - edgeSize.x)/(TextureSize.y))%1;
+			texCoord.y = targetCoord.y/TextureSize.y;
+			//Need to rotate
+			float temp = texCoord.x;
+			texCoord.x = texCoord.y;
+			texCoord.y = 1 - temp;
+			//Ajust to region
+			texCoord.x = texCoord.x/10 + 0.4;
+		}
+		else if (TargetSize.y - targetCoord.y &lt; edgeSize.y)
+		{
+			//Bottom border
+			texCoord.x = ((targetCoord.x - edgeSize.x)/(TextureSize.y))%1;
+			texCoord.y = (targetCoord.y - TargetSize.y + TextureSize.y)/TextureSize.y;
+			//Need to rotate
+			float temp = texCoord.x;
+			texCoord.x = texCoord.y;
+			texCoord.y = 1 - temp;
+			//Ajust to region
+			texCoord.x = texCoord.x/10 + 0.5;
+		}
+		else
+		{
+			//Middle fill
+			texCoord.x = (((targetCoord.x - edgeSize.x)/TextureSize.y)%1)/10 + 0.8;
+			texCoord.y = ((targetCoord.y - edgeSize.y)/TextureSize.y)%1;
+		}
+	}
+	
+	if (IsHalfTexture)
+	{
+		texCoord.y /= 2;
+		if (IsBottomHalf)
+			texCoord.y += 0.5;
+	}
+	float4 color = tex2D(ScreenS, texCoord);
+    return color * TintColor;    
+}
+
+technique HorizontalBorder
+{
+    pass Pass0
+    {
+		VertexShader = compile vs_3_0 SpriteVertexShader();
+        PixelShader = compile ps_3_0 HorizontalBorderPS();
+    }
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+float4 BorderPS(float2 texCoord: TEXCOORD0) : COLOR
+{
+	float texSizeY = TextureSize.y;
+	if (IsHalfTexture)
+	{
+		texSizeY /= 2;
+	}
+	float2 TargetPixel = texCoord * TargetSize;
+	float Texture1O8 = texSizeY / 8;
+	float Texture1O4 = TextureSize.x / 4;
+
+	if (TargetPixel.y &lt; Texture1O8)
+	{
+		if (TargetPixel.x &lt; Texture1O4)
+		{
+			//Top left
+			//Normalize texture coordinate
+			texCoord.x = TargetPixel.x/Texture1O4;
+			texCoord.y = TargetPixel.y/Texture1O8;
+			//Map to texture region
+			texCoord.x = texCoord.x/4;
+			texCoord.y = texCoord.y/8;
+		}
+		else if (TargetSize.x - TargetPixel.x &lt; Texture1O4)
+		{
+			//Top right
+			//Normalize texture coordinate
+			texCoord.x = (TargetPixel.x - TargetSize.x)/Texture1O4 + 1;
+			texCoord.y = TargetPixel.y/Texture1O8;
+			//Map to texture region
+			texCoord.x = (texCoord.x + 1)/4;
+			texCoord.y = texCoord.y/8;
+		}
+		else
+		{
+			//Top border
+			//Normalize texture coordinate
+			texCoord.x = ((TargetPixel.x - Texture1O4)/TextureSize.x)%1;
+			texCoord.y = TargetPixel.y/Texture1O8;
+			//Map to texture region
+			texCoord.x = texCoord.x;
+			texCoord.y = (texCoord.y + 1)/8;
+		}
+	}
+	else if (TargetSize.y - TargetPixel.y &lt; Texture1O8)
+	{
+		if (TargetPixel.x &lt; Texture1O4)
+		{
+			//Bottom left
+			//Normalize texture coordinate
+			texCoord.x = TargetPixel.x/Texture1O4;
+			texCoord.y = (TargetPixel.y - TargetSize.y)/Texture1O8 + 1;
+			//Map to texture region
+			texCoord.x = (texCoord.x + 2)/4;
+			texCoord.y = texCoord.y/8;
+		}
+		else if (TargetSize.x - TargetPixel.x &lt; Texture1O4)
+		{
+			//Bottom right
+			//Normalize texture coordinate
+			texCoord.x = (TargetPixel.x - TargetSize.x)/Texture1O4 + 1;
+			texCoord.y = (TargetPixel.y - TargetSize.y)/Texture1O8 + 1;
+			//Map to texture region
+			texCoord.x = (texCoord.x + 3)/4;
+			texCoord.y = texCoord.y/8;
+		}
+		else
+		{
+			//Bottom border
+			//Normalize texture coordinate
+			texCoord.x = ((TargetPixel.x - Texture1O4)/TextureSize.x)%1;
+			texCoord.y = (TargetPixel.y - TargetSize.y)/Texture1O8 + 1;
+			//Map to texture region
+			texCoord.x = texCoord.x;
+			texCoord.y = (texCoord.y + 2)/8;
+		}
+	}
+	else
+	{
+		if (TargetPixel.x &lt; Texture1O8)
+		{
+			//Left border
+			//Normalize texture coordinate
+			texCoord.x = TargetPixel.x/Texture1O8;
+			texCoord.y = ((TargetPixel.y - Texture1O8)/TextureSize.x)%1;
+			//Map to texture region
+			//Rotate first
+			float temp = texCoord.x;
+			texCoord.x = texCoord.y;
+			texCoord.y = 1 - temp;
+
+			texCoord.x = texCoord.x;
+			texCoord.y = (texCoord.y + 4)/8;
+		}
+		else if (TargetSize.x - TargetPixel.x &lt; Texture1O8)
+		{
+			//Right border
+			//Normalize texture coordinate
+			texCoord.x = (TargetPixel.x - TargetSize.x)/Texture1O8 + 1;
+			texCoord.y = ((TargetPixel.y - Texture1O8)/TextureSize.x)%1;
+			//Map to texture region
+			//Rotate first
+			float temp = texCoord.x;
+			texCoord.x = texCoord.y;
+			texCoord.y = 1 - temp;
+
+			texCoord.x = texCoord.x;
+			texCoord.y = (texCoord.y + 3)/8;
+		}
+		else
+		{
+			//Middle fill
+			//Normalize texture coordinate
+			texCoord.x = (4*(TargetPixel.x - Texture1O8)/TextureSize.x)%1;
+			texCoord.y = (8*(TargetPixel.y - Texture1O8)/texSizeY)%1;
+			//Map to texture region
+			texCoord.x = texCoord.x/4;
+			texCoord.y = (texCoord.y + 5)/8;
+		}
+	}
+	
+	if (IsHalfTexture)
+	{
+		texCoord.y /= 2;
+		if (IsBottomHalf)
+			texCoord.y += 0.5;
+	}
+	float4 color = tex2D(ScreenS, texCoord);
+    return color * TintColor;    
+}
+
+technique Border
+{
+    pass Pass0
+    {
+		VertexShader = compile vs_3_0 SpriteVertexShader();
+        PixelShader = compile ps_3_0 BorderPS();
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+float4 NormalPS(float2 texCoord: TEXCOORD0) : COLOR
+{
+	if (Tiled)
+		texCoord = texCoord * TargetSize / TextureSize % 1;
+		
+	if (IsHalfTexture)
+	{
+		texCoord.y /= 2;
+		if (IsBottomHalf)
+			texCoord.y += 0.5;
+	}
+    return tex2D(ScreenS, texCoord) * TintColor;    
+}
+
+technique Normal
+{
+    pass Pass0
+    {
+		VertexShader = compile vs_3_0 SpriteVertexShader();
+        PixelShader = compile ps_3_0 NormalPS();
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+float4 NonePS(float2 texCoord: TEXCOORD0) : COLOR
+{
+    return float4(1, 1, 1, 1) * TintColor;    
+}
+
+technique None
+{
+    pass Pass0
+    {
+		VertexShader = compile vs_3_0 SpriteVertexShader();
+        PixelShader = compile ps_3_0 NonePS();
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+float4 EndCapPS(float2 texCoord: TEXCOORD0) : COLOR
+{
+	float2 targetPixel = texCoord * TargetSize;
+	if (targetPixel.x &lt;= TextureSize.x/2)
+	{
+		//Left edge
+		texCoord.x = targetPixel.x/TextureSize.x;
+		texCoord.y = texCoord.y/2;
+	}
+	else if (targetPixel.x &gt;= TargetSize.x - TextureSize.x/2)
+	{
+		//Right edge
+		texCoord.x = (targetPixel.x - TargetSize.x + TextureSize.x/2)/TextureSize.x + 0.5;
+		texCoord.y = texCoord.y/2;
+	}
+	else
+	{
+		//Middle
+		texCoord.x = ((targetPixel.x - TextureSize.x/2)%TextureSize.x)/TextureSize.x;
+		texCoord.y = (texCoord.y + 1)/2;
+	}
+	if (IsHalfTexture)
+	{
+		texCoord.y /= 2;
+		if (IsBottomHalf)
+			texCoord.y += 0.5;
+	}
+	float4 color = tex2D(ScreenS, texCoord);
+    return color * TintColor;    
+}
+
+technique EndCap
+{
+    pass Pass0
+    {
+		VertexShader = compile vs_3_0 SpriteVertexShader();
+        PixelShader = compile ps_3_0 EndCapPS();
+    }
+}</value>
+  </data>
+  <data name="File" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\File.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dialog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dialog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Snowman" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Snowman.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="compiledEffect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\compiledEffect;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

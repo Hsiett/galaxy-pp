@@ -1,0 +1,1308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F280F7B2-DD21-459A-8BDC-ED3CD43855FE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Galaxy_Editor_2</RootNamespace>
+    <AssemblyName>Galaxy++ Editor</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Galaxy++ Editor.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;D:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;D:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Galaxy++ Editor.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;D:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;D:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aga.Controls, Version=1.7.0.0, Culture=neutral, PublicKeyToken=fcc90fbf924463a3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\Aga.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="CascLibSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\CascLibSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Engine" />
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Avatar, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.AudioImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.EffectImporter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.FBXImporter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.TextureImporter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.XImporter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Input.Touch, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Storage, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Video, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Xna.Framework.Xact, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="PresentationBuildTasks" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design">
+      <HintPath>..\..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v2.0.50727\System.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AutoSizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Change log form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Change log form.Designer.cs">
+      <DependentUpon>Change log form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compiler\TriggerLoader.cs" />
+    <Compile Include="Dialog Creator\Texture\DDSLib.cs" />
+    <Compile Include="Dialog Creator\Texture\LegacyTextureLoader.cs" />
+    <Compile Include="Dialog Creator\Texture\TextureLoader3_0.cs" />
+    <Compile Include="Dialog Creator\Texture\TextureLoaderInterface.cs" />
+    <Compile Include="Dialog Creator\util\Util.cs" />
+    <Compile Include="StarCraftExecutableFinder.cs" />
+    <Compile Include="CompileModWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompileModWindow.Designer.cs">
+      <DependentUpon>CompileModWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compiler\Contents\ConstantFolder.cs" />
+    <Compile Include="Compiler\Contents\DeclContainer.cs" />
+    <Compile Include="Compiler\Contents\StructDescription.cs" />
+    <Compile Include="Compiler\Contents\PropertyDescription.cs" />
+    <Compile Include="Compiler\Contents\TypedefDescription.cs" />
+    <Compile Include="Compiler\Contents\NamespaceDescription.cs" />
+    <Compile Include="Compiler\Contents\SuggestionBoxItem.cs" />
+    <Compile Include="Compiler\ErrorCollection.cs" />
+    <Compile Include="Compiler\GalaxyCompiler.cs" />
+    <Compile Include="Compiler\Contents\MethodDescription.cs" />
+    <Compile Include="Compiler\Contents\SourceFileContents.cs" />
+    <Compile Include="Compiler\Contents\EnrichmentDescription.cs" />
+    <Compile Include="Compiler\Contents\VariableDescription.cs" />
+    <Compile Include="Compiler\Generated\analysis.cs" />
+    <Compile Include="Compiler\Generated\lexer.cs" />
+    <Compile Include="Compiler\Generated\nodes.cs" />
+    <Compile Include="Compiler\Generated\parser.cs" />
+    <Compile Include="Compiler\Generated\prods.cs" />
+    <Compile Include="Compiler\Generated\tokens.cs" />
+    <Compile Include="Compiler\NotGenerated\ASimpleName.cs" />
+    <Compile Include="Compiler\NotGenerated\InvokeStm.cs" />
+    <Compile Include="Compiler\Phases\CodeGeneration.cs" />
+    <Compile Include="Compiler\Phases\Enheritance.cs" />
+    <Compile Include="Compiler\Phases\EnviromentBuilding.cs" />
+    <Compile Include="Compiler\Phases\EnviromentChecking.cs" />
+    <Compile Include="Compiler\Phases\MakeEnrichmentLinks.cs" />
+    <Compile Include="Compiler\Phases\SetArrayIndexes.cs" />
+    <Compile Include="Compiler\Phases\Transformations\AddUnneededRef.cs" />
+    <Compile Include="Compiler\Phases\Transformations\AssignFixup.cs" />
+    <Compile Include="Compiler\Phases\Transformations\BulkCopyFixup.cs" />
+    <Compile Include="Compiler\Phases\FixGenerics.cs" />
+    <Compile Include="Compiler\Phases\LinkNamedTypes.cs" />
+    <Compile Include="Compiler\Phases\Transformations\ConstantFolding.cs" />
+    <Compile Include="Compiler\Phases\Transformations\FixByteArrayIndexes.cs" />
+    <Compile Include="Compiler\Phases\Transformations\MainEntryFinder.cs" />
+    <Compile Include="Compiler\Phases\Transformations\MakeUniqueNamesV2.cs" />
+    <Compile Include="Compiler\Phases\Transformations\MergeSameMethods.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\ControlFlowGraph.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\LivenessAnalysis.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\MoveLocalsToStart.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\OptimizePhase.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\RemoveDeadCode.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\RemoveSelfAssignments.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\RemoveSingleUsedAssignments.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\RemoveUnusedAssignments.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\RemoveUnusedLocals.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\StatementRemover.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\Tools\GetUsedLocals.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\Tools\LocalChecker.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Optimizations\VariableJoiner.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Pointer null\PointerNullFixes.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Pointer null\Variables\Field.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Pointer null\Variables\IVariable.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Pointer null\Variables\LocalVariable.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Pointer null\Variables\Pointer.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Pointer null\Variables\StructField.cs" />
+    <Compile Include="Compiler\Phases\Transformations\RemoveConstants.cs" />
+    <Compile Include="Compiler\Phases\Transformations\RemoveNamespaces.cs" />
+    <Compile Include="Compiler\Phases\Transformations\RemoveUnnededRef.cs" />
+    <Compile Include="Compiler\Phases\Transformations\SplitStructTests.cs" />
+    <Compile Include="Compiler\Phases\Transformations\StaticStructMembers.cs" />
+    <Compile Include="Compiler\Phases\Transformations\StructInitializer.cs" />
+    <Compile Include="Compiler\Phases\Transformations\StructSplitter.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Delegates.cs" />
+    <Compile Include="Compiler\Phases\Transformations\GenerateBankPreloadFile.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Invokes.cs" />
+    <Compile Include="Compiler\Phases\Transformations\ObfuscateStrings.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Pointers.cs" />
+    <Compile Include="Compiler\Phases\Transformations\RemoveDeadCode.cs" />
+    <Compile Include="Compiler\Phases\Transformations\RemoveEmptyStructs.cs" />
+    <Compile Include="Compiler\Phases\Transformations\RenameRefferences.cs" />
+    <Compile Include="Compiler\Phases\Transformations\FinalTransformations.cs" />
+    <Compile Include="Compiler\Phases\LibraryData.cs" />
+    <Compile Include="Compiler\Phases\SharedData.cs" />
+    <Compile Include="Compiler\Phases\SimpleTransformations.cs" />
+    <Compile Include="Compiler\Phases\Transformations\FixIncludes.cs" />
+    <Compile Include="Compiler\Phases\Transformations\FixInlineMethods.cs" />
+    <Compile Include="Compiler\Phases\Transformations\LivenessAnalysis.cs" />
+    <Compile Include="Compiler\Phases\Transformations\MakeShortNames.cs" />
+    <Compile Include="Compiler\Phases\Transformations\MakeUniqueNames.cs" />
+    <Compile Include="Compiler\Phases\Transformations\RemoveUnusedVariables.cs" />
+    <Compile Include="Compiler\Phases\Transformations\RenameUnicode.cs" />
+    <Compile Include="Compiler\Phases\Transformations\TransformExpressionIfs.cs" />
+    <Compile Include="Compiler\Phases\Transformations\TransformMethodDecls.cs" />
+    <Compile Include="Compiler\Phases\Transformations\TransformProperties.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Util classes\CloneMethod.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Util classes\GetNonBlockStm.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Util classes\HasStringConstExp.cs" />
+    <Compile Include="Compiler\Phases\Transformations\Util classes\MoveMethodDeclsOut.cs" />
+    <Compile Include="Compiler\Phases\TypeChecking.cs" />
+    <Compile Include="Compiler\Phases\TypeLinking.cs" />
+    <Compile Include="Compiler\Phases\Weeder.cs" />
+    <Compile Include="Compiler\Preprocessor.cs" />
+    <Compile Include="Compiler\Util.cs" />
+    <Compile Include="CreateAccountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateAccountForm.Designer.cs">
+      <DependentUpon>CreateAccountForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog Creator\Complex properties\ColorDropDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialog Creator\Complex properties\ColorDropDown.Designer.cs">
+      <DependentUpon>ColorDropDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog Creator\Complex properties\ColorTypeEditor.cs" />
+    <Compile Include="Dialog Creator\Complex properties\EventTypeConverter.cs" />
+    <Compile Include="Dialog Creator\Complex properties\StyleUITypeEditor.cs" />
+    <Compile Include="Dialog Creator\Complex properties\ParentDialogUITypeConverter.cs" />
+    <Compile Include="Dialog Creator\Complex properties\SingleTextureProperty.cs" />
+    <Compile Include="Dialog Creator\Complex properties\SingleTextureUITypeEditor.cs" />
+    <Compile Include="Dialog Creator\Complex properties\StyleBrowserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog Creator\Complex properties\StyleBrowserDialog.Designer.cs">
+      <DependentUpon>StyleBrowserDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog Creator\Complex properties\TextureBrowserDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog Creator\Complex properties\TextureBrowserDialog.Designer.cs">
+      <DependentUpon>TextureBrowserDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog Creator\Controls\AbstractControl.cs" />
+    <Compile Include="Dialog Creator\Controls\Button.cs" />
+    <Compile Include="Dialog Creator\Controls\CheckBox.cs" />
+    <Compile Include="Dialog Creator\Controls\ChildDialog.cs" />
+    <Compile Include="Dialog Creator\Controls\Dialog.cs" />
+    <Compile Include="Dialog Creator\Controls\DialogControl.cs" />
+    <Compile Include="Dialog Creator\Controls\EditBoxControl.cs" />
+    <Compile Include="Dialog Creator\Controls\ImageControl.cs" />
+    <Compile Include="Dialog Creator\Controls\Label.cs" />
+    <Compile Include="Dialog Creator\Controls\ListBox.cs" />
+    <Compile Include="Dialog Creator\Controls\ProgressBar.cs" />
+    <Compile Include="Dialog Creator\Controls\Pulldown.cs" />
+    <Compile Include="Dialog Creator\Controls\RenderableItem.cs" />
+    <Compile Include="Dialog Creator\Complex properties\SingleTexturePropertyConverter.cs" />
+    <Compile Include="Dialog Creator\Controls\Slider.cs" />
+    <Compile Include="Dialog Creator\DialogData.cs" />
+    <Compile Include="Dialog Creator\Enums\BlendMode.cs" />
+    <Compile Include="Dialog Creator\Enums\Race.cs" />
+    <Compile Include="Dialog Creator\Enums\StyleFlags.cs" />
+    <Compile Include="Dialog Creator\ExtensionMethods.cs" />
+    <Compile Include="Dialog Creator\Fonts\FontData.cs" />
+    <Compile Include="Dialog Creator\Fonts\FontParser.cs" />
+    <Compile Include="Dialog Creator\Graphics Device Classes\ContentBuilder.cs" />
+    <Compile Include="Dialog Creator\Graphics Device Classes\ErrorLogger.cs" />
+    <Compile Include="Dialog Creator\PropertiesPropertyTab.cs" />
+    <Compile Include="Dialog Creator\DialogCreatorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Dialog Creator\DialogCreatorControl.Designer.cs">
+      <DependentUpon>DialogCreatorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog Creator\Enums\Anchor.cs" />
+    <Compile Include="Dialog Creator\Enums\ImageType.cs" />
+    <Compile Include="Dialog Creator\EventsPropertyTab.cs" />
+    <Compile Include="Dialog Creator\Graphics Device Classes\GraphicsDeviceControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialog Creator\Graphics Device Classes\GraphicsDeviceService.cs" />
+    <Compile Include="Dialog Creator\Graphics Device Classes\ServiceContainer.cs" />
+    <Compile Include="Dialog Creator\GraphicsControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialog Creator\TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog Creator\TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog Creator\TextureLoader.cs" />
+    <Compile Include="DowngradeWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DowngradeWindow.Designer.cs">
+      <DependentUpon>DowngradeWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DownloadLibraryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DownloadLibraryForm.Designer.cs">
+      <DependentUpon>DownloadLibraryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor control\FontScheme.cs" />
+    <Compile Include="Editor control\Ime.cs" />
+    <Compile Include="Editor control\Line.cs" />
+    <Compile Include="Editor control\TextPoint.cs" />
+    <Compile Include="Editor control\UndoSystem.cs" />
+    <Compile Include="ExceptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExceptionForm.Designer.cs">
+      <DependentUpon>ExceptionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FindAndReplaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindAndReplaceForm.Designer.cs">
+      <DependentUpon>FindAndReplaceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Editor control\MyEditor.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Editor control\MyEditor.Designer.cs">
+      <DependentUpon>MyEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionExtractor.cs" />
+    <Compile Include="GalaxyKeywords.cs" />
+    <Compile Include="GetStringDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetStringDialog.Designer.cs">
+      <DependentUpon>GetStringDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GotoLineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GotoLineForm.Designer.cs">
+      <DependentUpon>GotoLineForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LanguageChangesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LanguageChangesForm.Designer.cs">
+      <DependentUpon>LanguageChangesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageUserForm.Designer.cs">
+      <DependentUpon>ManageUserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MapObjectsManager.cs" />
+    <Compile Include="NewConstructorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewConstructorForm.Designer.cs">
+      <DependentUpon>NewConstructorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewProjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewProjectForm.Designer.cs">
+      <DependentUpon>NewProjectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Options.cs" />
+    <Compile Include="OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProgramVersion.cs" />
+    <Compile Include="ProjectProperties.cs" />
+    <Compile Include="ProjectSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectSettingsForm.Designer.cs">
+      <DependentUpon>ProjectSettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearcDefinitionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearcDefinitionsForm.Designer.cs">
+      <DependentUpon>SearcDefinitionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="stewoxTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="stewoxTest.Designer.cs">
+      <DependentUpon>stewoxTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Suggestion box\CustomSuggestionBoxItem.cs" />
+    <Compile Include="Suggestion box\ExtractDotType.cs" />
+    <Compile Include="Suggestion box\MyListbox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Suggestion box\MyListbox.Designer.cs">
+      <DependentUpon>MyListbox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Suggestion box\RedBlackTree.cs" />
+    <Compile Include="Suggestion box\SuggestionBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Suggestion box\SuggestionBoxForm.Designer.cs">
+      <DependentUpon>SuggestionBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabStrip\BaseClasses\BaseStyledPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TabStrip\Control\FATabStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TabStrip\Control\FATabStripCloseButton.cs" />
+    <Compile Include="TabStrip\Control\FATabStripItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TabStrip\Control\FATabStripItemCollection.cs" />
+    <Compile Include="TabStrip\Control\FATabStripMenuGlyph.cs" />
+    <Compile Include="TabStrip\Delegates.cs" />
+    <Compile Include="TabStrip\Design\FATabStripDesigner.cs" />
+    <Compile Include="TabStrip\Design\FATabStripItemDesigner.cs" />
+    <Compile Include="TabStrip\Design\ICaptionSupport.cs" />
+    <Compile Include="TabStrip\Enums.cs" />
+    <Compile Include="TabStrip\Helpers\CollectionWithEvents.cs" />
+    <Compile Include="MpqEditor.cs" />
+    <Compile Include="Tooltip\MyToolboxControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tooltip\MyToolboxControl.Designer.cs">
+      <DependentUpon>MyToolboxControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tooltip\TooltipForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tooltip\TooltipForm.Designer.cs">
+      <DependentUpon>TooltipForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeViewDragDrop.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UnitFilterDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitFilterDialog.Designer.cs">
+      <DependentUpon>UnitFilterDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdatingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdatingForm.Designer.cs">
+      <DependentUpon>UpdatingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UploadLibraryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UploadLibraryForm.Designer.cs">
+      <DependentUpon>UploadLibraryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UploadToMapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UploadToMapForm.Designer.cs">
+      <DependentUpon>UploadToMapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XNAWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XNAWarning.Designer.cs">
+      <DependentUpon>XNAWarning.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UnitFilterDialog.resx">
+      <DependentUpon>UnitFilterDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XNAWarning.resx">
+      <DependentUpon>XNAWarning.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.Config" />
+    <None Include="Effects\Effects.fx" />
+    <None Include="Effects\Effects_ps3.0.fx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Fonts\FontStyles.SC2Style">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Dialog Creator\Graphics Device Classes\Migrated rules for WinFormsContentLoading.ruleset" />
+    <Content Include="Fonts\FontHeader12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader14.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader16.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader18.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader20.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader22.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader24.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader26.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader28.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader30.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader32.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader34.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader36.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader38.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader40.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader42.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader48.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader50.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader52.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader64.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended14.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended16.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended18.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended20.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended22.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended24.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended26.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended28.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended30.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended32.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended34.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended36.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended38.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended40.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended42.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended48.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended50.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended52.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended64.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational14.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational16.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational18.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational20.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational22.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational24.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational26.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational28.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational30.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational32.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational34.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational36.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational38.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational40.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational42.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational48.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational50.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational52.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational64.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard14.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard16.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard18.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard20.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard22.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard24.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard26.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard28.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard30.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard32.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard34.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard36.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard38.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard40.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard42.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard48.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard50.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard52.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard64.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended12.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended14.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended16.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended18.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended20.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended22.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended24.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended26.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended28.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended30.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended32.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended34.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended36.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended38.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended40.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended42.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended48.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended50.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended52.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended64.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader17.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended17.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational17.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard17.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended17.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended10.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader56.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended56.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational56.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard56.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended56.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader60.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended60.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational60.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard60.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended60.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader11.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader13.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader15.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader19.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader21.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader25.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader35.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended11.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended13.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended15.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended19.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended21.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended25.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended35.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational11.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational13.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational15.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational19.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational21.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational25.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational35.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard11.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard13.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard15.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard19.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard21.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard25.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard35.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended11.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended13.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended15.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended19.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended21.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended25.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended35.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader62.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended62.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational62.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard62.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended62.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeader68.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontHeaderExtended68.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontInternational68.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandard68.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\FontStandardExtended68.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\compiledEffect" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\Screenshot2011-11-13 14_07_13.jpg" />
+    <Content Include="DialogBackground.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\events.png" />
+    <None Include="Resources\properties.png" />
+    <None Include="Resources\File.png" />
+    <None Include="Resources\FolderClosed.png" />
+    <None Include="Resources\FolderOpen.png" />
+    <None Include="Resources\Dialog.png" />
+    <None Include="Resources\JuleKrans.png" />
+    <None Include="Resources\Snowman.jpg" />
+    <Content Include="StormLib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\CutHS.png" />
+    <None Include="Resources\CopyHS.png" />
+    <None Include="Resources\PasteHS.png" />
+    <None Include="Resources\serverPublicKey" />
+    <EmbeddedResource Include="Change log form.resx">
+      <DependentUpon>Change log form.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompileModWindow.resx">
+      <DependentUpon>CompileModWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateAccountForm.resx">
+      <DependentUpon>CreateAccountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog Creator\Complex properties\ColorDropDown.resx">
+      <DependentUpon>ColorDropDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog Creator\Complex properties\StyleBrowserDialog.resx">
+      <DependentUpon>StyleBrowserDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog Creator\Complex properties\TextureBrowserDialog.resx">
+      <DependentUpon>TextureBrowserDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog Creator\DialogCreatorControl.resx">
+      <DependentUpon>DialogCreatorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog Creator\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DowngradeWindow.resx">
+      <DependentUpon>DowngradeWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DownloadLibraryForm.resx">
+      <DependentUpon>DownloadLibraryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageUserForm.resx">
+      <DependentUpon>ManageUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewConstructorForm.resx">
+      <DependentUpon>NewConstructorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewProjectForm.resx">
+      <DependentUpon>NewProjectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="stewoxTest.resx">
+      <DependentUpon>stewoxTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdatingForm.resx">
+      <DependentUpon>UpdatingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UploadLibraryForm.resx">
+      <DependentUpon>UploadLibraryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UploadToMapForm.resx">
+      <DependentUpon>UploadToMapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Compiler\Generated\Changes.txt" />
+    <Content Include="Deobfuscator.LibraryData">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Galaxy.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Precompiled.LibraryData">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\Standard libraries\Standard\ExtraMethods.galaxy" />
+    <None Include="Resources\PropertiesImage.bmp" />
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExceptionForm.resx">
+      <DependentUpon>ExceptionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindAndReplaceForm.resx">
+      <DependentUpon>FindAndReplaceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GetStringDialog.resx">
+      <DependentUpon>GetStringDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GotoLineForm.resx">
+      <DependentUpon>GotoLineForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LanguageChangesForm.resx">
+      <DependentUpon>LanguageChangesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectSettingsForm.resx">
+      <DependentUpon>ProjectSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="SearcDefinitionsForm.resx">
+      <DependentUpon>SearcDefinitionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Suggestion box\SuggestionBoxForm.resx">
+      <DependentUpon>SuggestionBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tooltip\MyToolboxControl.resx">
+      <DependentUpon>MyToolboxControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tooltip\TooltipForm.resx">
+      <DependentUpon>TooltipForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="DefaultMapScript.galaxy++">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Changelog.txt" />
+    <None Include="Resources\Standard libraries\Standard\AI.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\BuildAI.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\CampaignAI.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\DebugGalaxy.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Abil.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Achievement.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\AchievementTerm.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Actor.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Alert.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\AttachMethod.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Beam.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Behavior.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Button.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Camera.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Cliff.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\CliffMesh.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Conversation.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\ConversationState.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Cursor.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\DSP.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Effect.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Error.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Footprint.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\FoW.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Game.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\GameData.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\GameDataAllNatives.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\GameUI.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Item.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\ItemClass.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\ItemContainer.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Light.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Loot.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Model.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Mover.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Race.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Requirement.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\RequirementNode.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Reverb.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Reward.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\ScoreResult.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\ScoreValue.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Sound.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Soundtrack.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Tactical.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\TargetFind.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\TargetSort.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Terrain.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\TerrainObject.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\TerrainTex.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Texture.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Tile.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Turret.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Unit.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Upgrade.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Validator.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Water.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\GameData\Weapon.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\MeleeAI.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\NativeLib.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\natives.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\RequirementsAI.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\TacticalAI.galaxy" />
+    <None Include="Resources\Standard libraries\Standard\TestNatives.galaxy" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedClasses\SharedClasses.csproj">
+      <Project>{2C2CAB7D-206B-444E-9700-F7A598BAAFF6}</Project>
+      <Name>SharedClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Updater\Updater.csproj">
+      <Project>{6AF99BB4-393D-470C-BF32-1C5486094423}</Project>
+      <Name>Updater</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,64 @@
+﻿AStringConstExp:
+    public override Object Clone()
+    {
+        AStringConstExp constExp = new AStringConstExp (
+            (TStringLiteral)CloneNode (_string_literal_)
+        );
+		
+        if (SharedData.LastCreated != null)
+        {
+			for (int i = 0; i < SharedData.LastCreated.ObfuscatedStrings.Count; i++)
+			{
+				var enumerator = SharedData.LastCreated.ObfuscatedStrings.Keys.GetEnumerator();
+				for (int j = 0; j <= i; j++)
+				{
+					enumerator.MoveNext();
+				}
+				AStringConstExp key = enumerator.Current;
+				if (key == this)
+				{
+					SharedData.LastCreated.ObfuscatedStrings[constExp] = SharedData.LastCreated.ObfuscatedStrings[key];
+					//SharedData.LastCreated.ObfuscatedStrings.Remove(key);
+					return constExp;
+				}
+			}
+
+			for (int i = 0; i < SharedData.LastCreated.UnobfuscatedStrings.Count; i++)
+			{
+				var enumerator = SharedData.LastCreated.UnobfuscatedStrings.Keys.GetEnumerator();
+				for (int j = 0; j <= i; j++)
+				{
+					enumerator.MoveNext();
+				}
+				AStringConstExp key = enumerator.Current;
+				if (key == this)
+				{
+					SharedData.LastCreated.UnobfuscatedStrings[constExp] = SharedData.LastCreated.UnobfuscatedStrings[key];
+					//SharedData.LastCreated.UnobfuscatedStrings.Remove(key);
+					return constExp;
+				}
+			}
+		}
+        return constExp;
+    }
+
+
+
+ANamedType:
+public ANamedType(TIdentifier name, TIdentifier ns)
+    {
+        AAName aName = new AAName();
+        if (ns != null)
+            aName.GetIdentifier().Add(ns);
+        aName.GetIdentifier().Add(name);
+        SetName(aName);
+    }
+
+
+AAmbiguousNameLvalue:
+    public AAmbiguousNameLvalue(ASimpleName simpleName)
+    {
+        AAName name = new AAName();
+        name.GetIdentifier().Add(simpleName.Identifier);
+        SetAmbiguous(name);
+    }

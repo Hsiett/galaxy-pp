@@ -542,6 +542,9 @@
       <DependentUpon>XNAWarning.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.Config" />
+    <None Include="Base.LibraryData">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Effects\Effects.fx" />
     <None Include="Effects\Effects_ps3.0.fx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
